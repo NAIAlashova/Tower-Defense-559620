@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://b400x2iroaaji"]
+
+[ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower.tscn" id="1_brycl"]
+[ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower.tscn" id="2_ufl4h"]
+
+[sub_resource type="Environment" id="Environment_4kxuq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4kxuq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mti6b"]
+
+[node name="BaseScene" type="Node3D" unique_id=1115954715]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1031824530]
+environment = SubResource("Environment_4kxuq")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=493847384]
+transform = Transform3D(2.3142967, 0, 0, 0, 1, 0, 0, 0, 2.5347779, 0, -0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1108871477]
+transform = Transform3D(4.3259873, 0, 0, 0, 1, 0, 0, 0, 4.3259864, 0, 0, 0)
+mesh = SubResource("PlaneMesh_4kxuq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=344271820]
+transform = Transform3D(8.997122, 0, 0, 0, 1, 0, 0, 0, 8.997119, 0, 0, 0)
+shape = SubResource("BoxShape3D_mti6b")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1168122468]
+transform = Transform3D(1, 0, 0, 0, 0.19819859, 0.9801619, 0, -0.9801619, 0.19819859, 0.005209923, 15.791336, 5.142352)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=623056927]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 11, 0)
+light_energy = 5.0
+light_indirect_energy = 5.0
+spot_range = 27.057386
+spot_angle = 70.3125
+
+[node name="Tower" parent="." unique_id=1813011361 instance=ExtResource("2_ufl4h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Tower2" parent="." unique_id=659565859 instance=ExtResource("2_ufl4h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.814161, 0, 5.1484547)
+
+[node name="EnemieTower" parent="." unique_id=110278794 instance=ExtResource("1_brycl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98275, 0, -3.2459269)
+
+[node name="EnemieTower2" parent="." unique_id=1728614070 instance=ExtResource("1_brycl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5073338, 0, 8.952975)
+
+[node name="EnemieTower3" parent="." unique_id=1990289897 instance=ExtResource("1_brycl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.926178, 0, -9.4924135)
+
+[node name="EnemieTower4" parent="." unique_id=1355318387 instance=ExtResource("1_brycl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.157743, 0, 3.2801228)

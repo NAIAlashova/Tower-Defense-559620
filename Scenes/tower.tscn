@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dli1bqmix0erf"]
+
+[ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="1_ndpwd"]
+[ext_resource type="Script" uid="uid://bepbllqttmf85" path="res://Components/VisibleComponent.cs" id="2_mh5eo"]
+[ext_resource type="Script" uid="uid://cqrefvsfgnkbp" path="res://Components/ShootingComponent.cs" id="3_tghyl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4kxuq"]
+radius = 0.66503906
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_r8qnq"]
+albedo_color = Color(0.43137255, 0.6666667, 0.23529412, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ndpwd"]
+material = SubResource("ORMMaterial3D_r8qnq")
+top_radius = 0.3
+bottom_radius = 0.65
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tghyl"]
+radius = 29.0
+
+[node name="Tower" type="CharacterBody3D" unique_id=1813011361 groups=["allies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=895449737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.004727, 0)
+shape = SubResource("CylinderShape3D_4kxuq")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1992910723]
+script = ExtResource("1_ndpwd")
+metadata/_custom_type_script = "uid://c0gluegirdvt8"
+
+[node name="Node3D" type="Node3D" parent="." unique_id=386652505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.004727, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1771860733]
+mesh = SubResource("CylinderMesh_ndpwd")
+
+[node name="VisibleComponent" type="Area3D" parent="." unique_id=846131184]
+script = ExtResource("2_mh5eo")
+metadata/_custom_type_script = "uid://bepbllqttmf85"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibleComponent" unique_id=11628928]
+shape = SubResource("SphereShape3D_tghyl")
+
+[node name="ShootingComponent" type="Node" parent="." unique_id=1480899241 node_paths=PackedStringArray("visibleComponent")]
+script = ExtResource("3_tghyl")
+ShootingCooldown = 2.0
+visibleComponent = NodePath("../VisibleComponent")
+metadata/_custom_type_script = "uid://cqrefvsfgnkbp"
