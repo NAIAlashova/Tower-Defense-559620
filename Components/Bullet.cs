@@ -9,6 +9,24 @@ public partial class Bullet : Area3D
     private float BulletSpeed = 20f;
     public string damagingGroup;
     public Node3D parentNode;
+    private DamagingComponent damagingComponent;
+
+// Задаем значения переменным компонента DamagingComponent.
+    public override void _Ready()
+    {
+        foreach (var child in GetChildren())
+        {
+            if (child is DamagingComponent _damagingComponent)
+            {
+                damagingComponent = _damagingComponent;
+                break;
+            }
+
+        }
+
+        damagingComponent.damagingGroup = damagingGroup;
+        damagingComponent.shootedNode = parentNode;
+    }
 
     public override void _Process(double delta)
     {
@@ -19,16 +37,7 @@ public partial class Bullet : Area3D
     {
         if (body.IsInGroup(damagingGroup))
         {
-            GD.Print("in enemie");
-            foreach (var child in body.GetChildren())
-            {
-                if (child is HealthComponent healthComponent)
-                {
-                    healthComponent.TakeDamage(30);
-                    break;
-                }
-            }
-            QueueFree();
+            damagingComponent.Hit(body);
         }
     }
 }
