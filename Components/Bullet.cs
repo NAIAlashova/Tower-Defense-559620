@@ -23,7 +23,6 @@ public partial class Bullet : Area3D
             }
 
         }
-
         damagingComponent.damagingGroup = damagingGroup;
         damagingComponent.shootedNode = parentNode;
     }
@@ -39,5 +38,10 @@ public partial class Bullet : Area3D
         {
             damagingComponent.Hit(body);
         }
+    }
+
+    public void GetDamage(float damage)
+    {
+        damagingComponent.damage = damage;
     }
 }

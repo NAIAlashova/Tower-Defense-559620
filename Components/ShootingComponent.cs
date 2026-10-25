@@ -54,6 +54,14 @@ public partial class ShootingComponent : Node
             bulletInstance.damagingGroup = "allies";
         }
         bulletInstance.parentNode = parentNode;
+        if (parentNode is Player)
+        {
+            bulletInstance.GetDamage(10f);
+        }
+        else
+        {
+            bulletInstance.GetDamage(20f);
+        }
         parentNode.AddSibling(bulletInstance);
         if (IsInstanceValid(Target))
         {

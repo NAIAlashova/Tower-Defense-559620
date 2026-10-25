@@ -5,6 +5,8 @@ using System;
 public partial class DamagingComponent : Node
 {
     public string damagingGroup;
+    [Export]
+    public float damage;
     public Node3D shootedNode;
     private Node3D bulletParentNode;
 
@@ -34,7 +36,7 @@ public partial class DamagingComponent : Node
             {
                 if (child is HealthComponent healthComponent)
                 {
-                    healthComponent.TakeDamage(30);
+                    healthComponent.TakeDamage(damage);
                     break;
                 }
             }
