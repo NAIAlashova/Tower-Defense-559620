@@ -23,6 +23,7 @@ public partial class Player : CharacterBody3D
     {
         if (isDo == 1)
         {
+            // LookAt(GetGlobalMousePosition(), Vector3.Up);
             if (Input.IsActionPressed("forward"))
             {
                 _velocity = new Vector3 (10f, 0f, 0f);
@@ -44,6 +45,14 @@ public partial class Player : CharacterBody3D
                 Position += _velocity * delta;
             }
         }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseMotion mouseMotionEvent)
+        {
+            RotateY(Mathf.DegToRad(-mouseMotionEvent.Relative.X * 0.1f));
+        }
         if (Input.IsActionJustPressed("pause"))
         {
             foreach (var sibling in parentNode.GetChildren())
@@ -60,7 +69,20 @@ public partial class Player : CharacterBody3D
                         shootingComponent.Pause();
                     }
                 }
+                InstanceMenu();
             }
+        }
+    }
+
+    private void InstanceMenu()
+    {
+        if (isDo == -1)
+        {
+            /// Создаём меню
+        }
+        else
+        {
+            /// Удаляем меню
         }
     }
 }

@@ -15,9 +15,9 @@ public partial class ShootingComponent : Node
     [Export]
     private float CooldownShotting = 1f;
     [Export]
-    private PackedScene BulletScene = GD.Load<PackedScene>("res://Scenes/bullet.tscn");
+    protected PackedScene BulletScene = GD.Load<PackedScene>("res://Scenes/bullet.tscn");
     private float CooldownProgress = 0f;
-    private int isDo = 1;
+    protected int isDo = 1;
 
     public override void _Ready()
     {
@@ -44,7 +44,7 @@ public partial class ShootingComponent : Node
         CooldownProgress -= (float) delta;
     }
 
-    private void ShootBullet()
+    protected virtual void ShootBullet()
     {
         Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
         bulletInstance.Position = parentNode.Position;

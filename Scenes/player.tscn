@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmtct1iear28n" path="res://Components/Player.cs" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://w836pm5rv37l" path="res://Components/PlayersShootingComponent.cs" id="3_6t5aa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
 radius = 0.31152344
@@ -33,3 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=890491538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 mesh = SubResource("CapsuleMesh_4kxuq")
+
+[node name="PlayersShootingComponent" type="Node" parent="." unique_id=649499032]
+script = ExtResource("3_6t5aa")
+metadata/_custom_type_script = "uid://w836pm5rv37l"
