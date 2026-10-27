@@ -17,6 +17,7 @@ public partial class ShootingComponent : Node
     [Export]
     private PackedScene BulletScene = GD.Load<PackedScene>("res://Scenes/bullet.tscn");
     private float CooldownProgress = 0f;
+    private int isDo = 1;
 
     public override void _Ready()
     {
@@ -29,8 +30,11 @@ public partial class ShootingComponent : Node
         {
             if (CooldownProgress <= 0.0)
             {
-                CooldownProgress = ShootingCooldown;
-                ShootBullet();
+                if (isDo == 1)
+                {
+                    CooldownProgress = ShootingCooldown;
+                    ShootBullet();
+                }
             }
         }
         else if (visibleComponent != null)
@@ -54,6 +58,7 @@ public partial class ShootingComponent : Node
             bulletInstance.damagingGroup = "allies";
         }
         bulletInstance.parentNode = parentNode;
+        parentNode.AddSibling(bulletInstance);
         if (parentNode is Player)
         {
             bulletInstance.GetDamage(10f);
@@ -62,11 +67,15 @@ public partial class ShootingComponent : Node
         {
             bulletInstance.GetDamage(20f);
         }
-        parentNode.AddSibling(bulletInstance);
         if (IsInstanceValid(Target))
         {
             bulletInstance.LookAt(Target.Position);
         }
         GD.Print("Bullet");
+    }
+    
+    public void Pause()
+    {
+        isDo = isDo * -1;
     }
 }

@@ -6,7 +6,7 @@ public partial class DamagingComponent : Node
 {
     public string damagingGroup;
     [Export]
-    public float damage;
+    public float damage{set; get;}
     public Node3D shootedNode;
     private Node3D bulletParentNode;
 

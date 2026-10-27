@@ -12,6 +12,7 @@ public partial class MoveComponent : Node
     private Node3D Target;
     [Export]
     private VisibleComponent visibleComponent;
+    private int isDo {set; get;} = 1;
 
     public override void _Ready()
     {
@@ -30,22 +31,30 @@ public partial class MoveComponent : Node
     }
     private void _Move(float delta)
     {
-        if (IsInstanceValid(Target)) 
+        if (isDo == 1)
         {
-            Vector3 _velocity = Target.Position - parentNode.Position;
-            _velocity.Y = 0f;
-            if (parentNode.Position.DistanceTo(Target.Position) > StopRadius)
+            if (IsInstanceValid(Target)) 
             {
+                Vector3 _velocity = Target.Position - parentNode.Position;
+                _velocity.Y = 0f;
+                if (parentNode.Position.DistanceTo(Target.Position) > StopRadius)
+                {
+                    parentNode.Position += _velocity.Normalized() * Speed * delta;
+                    parentNode.MoveAndSlide();
+                }
+            }
+            else
+            {
+                Vector3 _velocity = new Vector3(0f, 0f, 0f) - Target.Position;
+                _velocity.Y = 0f;
                 parentNode.Position += _velocity.Normalized() * Speed * delta;
                 parentNode.MoveAndSlide();
             }
         }
-        else
-        {
-            Vector3 _velocity = new Vector3(0f, 0f, 0f) - Target.Position;
-            _velocity.Y = 0f;
-            parentNode.Position += _velocity.Normalized() * Speed * delta;
-            parentNode.MoveAndSlide();
-        }
+    }
+    
+    public void Pause()
+    {
+        isDo = isDo * -1;
     }
 }

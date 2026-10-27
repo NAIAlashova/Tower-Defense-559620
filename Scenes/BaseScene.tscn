@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower.tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower.tscn" id="2_ufl4h"]
+[ext_resource type="PackedScene" uid="uid://cty4p7vaoqhkf" path="res://Scenes/player.tscn" id="3_58y5n"]
 
 [sub_resource type="Environment" id="Environment_4kxuq"]
 
@@ -24,10 +25,6 @@ mesh = SubResource("PlaneMesh_4kxuq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=344271820]
 transform = Transform3D(8.997122, 0, 0, 0, 1, 0, 0, 0, 8.997119, 0, 0, 0)
 shape = SubResource("BoxShape3D_mti6b")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1168122468]
-transform = Transform3D(1, 0, 0, 0, 0.19819859, 0.9801619, 0, -0.9801619, 0.19819859, 0.005209923, 15.791336, 5.142352)
-current = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=623056927]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 11, 0)
@@ -53,3 +50,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.926178, 0, -9.4924135)
 
 [node name="EnemieTower4" parent="." unique_id=1355318387 instance=ExtResource("1_brycl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.157743, 0, 3.2801228)
+
+[node name="Player" parent="." unique_id=2068096347 instance=ExtResource("3_58y5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1168122468]
+transform = Transform3D(-4.371139e-08, 0.79863554, -0.60181504, 0, 0.60181504, 0.79863554, 1, 3.490947e-08, -2.6306171e-08, -3.0010004, 7, 0)
+current = true
