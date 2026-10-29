@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower.tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower.tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://cty4p7vaoqhkf" path="res://Scenes/player.tscn" id="3_58y5n"]
+[ext_resource type="Script" uid="uid://csxdi8aulef8j" path="res://Components/TrackerComponent.cs" id="4_4ksr6"]
+[ext_resource type="Script" uid="uid://24pint26tctv" path="res://Components/InventaryComponent.cs" id="5_uc7fm"]
 
 [sub_resource type="Environment" id="Environment_4kxuq"]
 
@@ -57,3 +59,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1168122468]
 transform = Transform3D(-4.2680483e-08, 0.21589911, -0.97641575, 9.43725e-09, 0.97641575, 0.21589911, 1, -1.7763568e-15, -4.3711392e-08, -5.4313345, 3.2134254, 0)
 current = true
+
+[node name="TrackerComponent" type="Node" parent="." unique_id=1616083502 node_paths=PackedStringArray("inventaryNode")]
+script = ExtResource("4_4ksr6")
+inventaryNode = NodePath("../InventaryComponent")
+metadata/_custom_type_script = "uid://csxdi8aulef8j"
+
+[node name="InventaryComponent" type="Node" parent="." unique_id=626716244]
+script = ExtResource("5_uc7fm")
+metadata/_custom_type_script = "uid://24pint26tctv"
