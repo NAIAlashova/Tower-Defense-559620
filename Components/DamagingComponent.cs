@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class DamagingComponent : Node
+public partial class DamagingComponent : Area3D
 {
     public string damagingGroup;
     [Export]
@@ -15,7 +15,15 @@ public partial class DamagingComponent : Node
         bulletParentNode = GetParent<Area3D>();
     }
 
-    public void Hit(Node3D body)
+    public void _on_body_entered(Node3D body)
+    {
+        if (body.IsInGroup(damagingGroup))
+        {
+            Hit(body);
+        }
+    }
+
+    private void Hit(Node3D body)
     {
         if (body.IsInGroup(damagingGroup))
         {
