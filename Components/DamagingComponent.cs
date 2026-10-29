@@ -8,7 +8,7 @@ public partial class DamagingComponent : Area3D
     [Export]
     public float damage{set; get;}
     public Node3D shootedNode;
-    private Node3D bulletParentNode;
+    protected Node3D bulletParentNode;
 
     public override void _Ready()
     {
@@ -35,7 +35,6 @@ public partial class DamagingComponent : Area3D
         {
             bulletParentNode.QueueFree();
         }
-        GD.Print("Damage");
     }
 
     protected virtual void Damage(Node3D enemy)

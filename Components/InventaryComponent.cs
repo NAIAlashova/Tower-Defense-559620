@@ -10,6 +10,7 @@ public partial class InventaryComponent : Node
     [Export]
     private int InitialResources = 100;
     /// <summary>
+    /// Цена постройки башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingСomponent
     /// </summary>
@@ -30,7 +31,7 @@ public partial class InventaryComponent : Node
     {
         foreach (var component in tower.GetChildren())
         {
-            if (component is ShootingComponent shooter)
+            if (component is ShootingComponent)
             {
                 currentResources = currentResources + TowersAward[0];
             }

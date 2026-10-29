@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dwlql5jihgull"]
+
+[ext_resource type="Script" uid="uid://c54a2msuvg4ac" path="res://Components/MoveComponent.cs" id="1_qjq6r"]
+[ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_f2bch"]
+[ext_resource type="Script" uid="uid://dty27dot5d7gg" path="res://Components/ExplosiveComponent.cs" id="3_xujb0"]
+[ext_resource type="Script" uid="uid://bepbllqttmf85" path="res://Components/VisibleComponent.cs" id="4_jta0u"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jugqt"]
+height = 1.0092773
+radius = 0.54345703
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kxuq"]
+radius = 0.93878174
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_xujb0"]
+albedo_color = Color(1, 0.18039216, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4kxuq"]
+material = SubResource("ORMMaterial3D_xujb0")
+top_radius = 0.36621094
+bottom_radius = 0.36621094
+height = 0.19927979
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ncdv"]
+size = Vector3(25, 3.5, 25)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1805737031 groups=["enemies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=998196156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49536133, 0)
+shape = SubResource("CylinderShape3D_jugqt")
+
+[node name="MoveComponent" type="Node" parent="." unique_id=259217277 node_paths=PackedStringArray("visibleComponent")]
+script = ExtResource("1_qjq6r")
+Speed = 5.0
+StopRadius = 0.0
+visibleComponent = NodePath("../VisibleComponent")
+metadata/_custom_type_script = "uid://c54a2msuvg4ac"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1973516348]
+script = ExtResource("2_f2bch")
+MaxHealth = 70.0
+metadata/_custom_type_script = "uid://c0gluegirdvt8"
+
+[node name="ExplosiveComponent" type="Area3D" parent="." unique_id=1205519532 groups=["enemies"]]
+script = ExtResource("3_xujb0")
+metadata/_custom_type_script = "uid://dty27dot5d7gg"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosiveComponent" unique_id=884091525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("SphereShape3D_4kxuq")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=769659019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18435335, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=888459488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1507042, 0)
+mesh = SubResource("CylinderMesh_4kxuq")
+
+[node name="VisibleComponent" type="Area3D" parent="." unique_id=1067739849]
+script = ExtResource("4_jta0u")
+metadata/_custom_type_script = "uid://bepbllqttmf85"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibleComponent" unique_id=1771239617]
+shape = SubResource("BoxShape3D_2ncdv")
+
+[connection signal="body_entered" from="ExplosiveComponent" to="ExplosiveComponent" method="_on_body_entered"]
