@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://b400x2iroaaji"]
 
-[ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower.tscn" id="1_brycl"]
+[ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower(t1).tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://dwlql5jihgull" path="res://Scenes/enemy_tower(t3).tscn" id="1_uc7fm"]
 [ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower.tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://cty4p7vaoqhkf" path="res://Scenes/player.tscn" id="3_58y5n"]
 [ext_resource type="Script" uid="uid://csxdi8aulef8j" path="res://Components/TrackerComponent.cs" id="4_4ksr6"]
 [ext_resource type="Script" uid="uid://24pint26tctv" path="res://Components/InventaryComponent.cs" id="5_uc7fm"]
+[ext_resource type="PackedScene" uid="uid://bopmbls88riy8" path="res://Scenes/enemy_tower(t2).tscn" id="7_56e3h"]
+[ext_resource type="PackedScene" uid="uid://dit837ntpsc88" path="res://Scenes/Core.tscn" id="8_eumj5"]
 
 [sub_resource type="Environment" id="Environment_4kxuq"]
 
@@ -40,10 +42,10 @@ spot_angle = 70.3125
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2096899, 0, -8.13081)
 
 [node name="Tower" parent="." unique_id=1813011361 instance=ExtResource("2_ufl4h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 
 [node name="Tower2" parent="." unique_id=659565859 instance=ExtResource("2_ufl4h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.814161, 0, 5.1484547)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
 
 [node name="EnemieTower" parent="." unique_id=110278794 instance=ExtResource("1_brycl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98275, 0, -3.2459269)
@@ -55,13 +57,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5073338, 0, 8.952975)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.926178, 0, -9.4924135)
 
 [node name="EnemieTower4" parent="." unique_id=1355318387 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.157743, 0, 3.2801228)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.66528, 0, 9.212641)
 
 [node name="Player" parent="." unique_id=2068096347 instance=ExtResource("3_58y5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1168122468]
-transform = Transform3D(-4.2680483e-08, 0.21589911, -0.97641575, 9.43725e-09, 0.97641575, 0.21589911, 1, -1.7763568e-15, -4.3711392e-08, -5.4313345, 3.2134254, 0)
+transform = Transform3D(1, 0, 0, 0, 0.88701075, 0.46174857, 0, -0.46174857, 0.88701075, 0, 5.213, 5)
 current = true
 
 [node name="TrackerComponent" type="Node" parent="." unique_id=1616083502 node_paths=PackedStringArray("inventaryNode")]
@@ -72,3 +74,9 @@ metadata/_custom_type_script = "uid://csxdi8aulef8j"
 [node name="InventaryComponent" type="Node" parent="." unique_id=626716244]
 script = ExtResource("5_uc7fm")
 metadata/_custom_type_script = "uid://24pint26tctv"
+
+[node name="EnemieTimeTower" parent="." unique_id=1891862802 instance=ExtResource("7_56e3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.54666, 0.09516621, -0.040312767)
+
+[node name="Core" parent="." unique_id=793690817 instance=ExtResource("8_eumj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

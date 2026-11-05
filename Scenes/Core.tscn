@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dit837ntpsc88"]
+
+[ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_ec8af"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_mti6b"]
+albedo_color = Color(1, 0.8784314, 0, 1)
+emission_enabled = true
+emission = Color(0, 0, 0.39215687, 1)
+emission_on_uv2 = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_4kxuq"]
+material = SubResource("ORMMaterial3D_mti6b")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kxuq"]
+radius = 1.2534972
+
+[node name="Core" type="CharacterBody3D" unique_id=1219051994 groups=["allies"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1613988263]
+mesh = SubResource("SphereMesh_4kxuq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1074845688]
+shape = SubResource("SphereShape3D_4kxuq")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1602703113]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1523705988]
+shape = SubResource("SphereShape3D_4kxuq")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=152510117]
+script = ExtResource("2_ec8af")
+MaxHealth = 300.0
+metadata/_custom_type_script = "uid://c0gluegirdvt8"

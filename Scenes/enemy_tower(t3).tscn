@@ -44,6 +44,7 @@ metadata/_custom_type_script = "uid://c0gluegirdvt8"
 
 [node name="ExplosiveComponent" type="Area3D" parent="." unique_id=1205519532 groups=["enemies"]]
 script = ExtResource("3_xujb0")
+damagingGroup = "allies"
 metadata/_custom_type_script = "uid://dty27dot5d7gg"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosiveComponent" unique_id=884091525]

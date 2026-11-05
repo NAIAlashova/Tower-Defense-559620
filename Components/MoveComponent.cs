@@ -13,6 +13,7 @@ public partial class MoveComponent : Node
     [Export]
     private VisibleComponent visibleComponent;
     private int isDo {set; get;} = 1;
+    private Timer timer;
 
     public override void _Ready()
     {
@@ -20,6 +21,13 @@ public partial class MoveComponent : Node
     }
     public override void _PhysicsProcess(double delta)
     {
+        if (timer != null)
+        {
+            if (timer.IsStopped())
+            {
+                Speed = Speed * 4;
+            }
+        }
         if (!IsInstanceValid(Target))
         {
             Target = visibleComponent.GetTarget();
@@ -56,5 +64,15 @@ public partial class MoveComponent : Node
     public void Pause()
     {
         isDo = isDo * -1;
+    }
+
+    public virtual void Slowdown()
+    {
+        Speed = Speed / 4;
+        timer = new Timer();
+        timer.WaitTime = 4;
+        timer.OneShot = true;
+        AddChild(timer);
+        timer.Start();
     }
 }
