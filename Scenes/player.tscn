@@ -26,6 +26,7 @@ shape = SubResource("CapsuleShape3D_cvnsp")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=2073223943]
 script = ExtResource("2_cvnsp")
+MaxHealth = 300.0
 metadata/_custom_type_script = "uid://c0gluegirdvt8"
 
 [node name="Node3D" type="Node3D" parent="." unique_id=2136406617]

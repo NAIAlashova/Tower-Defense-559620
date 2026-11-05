@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bm7qlcvox1xj4"]
+
+[ext_resource type="Script" uid="uid://bcr03rjgunejc" path="res://Components/Bullet.cs" id="1_4w76x"]
+[ext_resource type="Script" uid="uid://c83uqv0missjr" path="res://Components/SlowingComponent.cs" id="2_kjibk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
+radius = 0.119628906
+height = 0.5523834
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b3wu"]
+albedo_color = Color(0.3019608, 0.39607844, 0.8901961, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4kxuq"]
+material = SubResource("StandardMaterial3D_0b3wu")
+radius = 0.1
+height = 0.5
+
+[node name="TimeBullet" type="Area3D" unique_id=1598322752]
+script = ExtResource("1_4w76x")
+BulletSpeed = 10.0
+metadata/_custom_type_script = "uid://bcr03rjgunejc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1692214374]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=327785231]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_4kxuq")
+
+[node name="SlowingComponent" type="Area3D" parent="." unique_id=894688497]
+script = ExtResource("2_kjibk")
+metadata/_custom_type_script = "uid://c83uqv0missjr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlowingComponent" unique_id=983349035]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[connection signal="body_entered" from="SlowingComponent" to="SlowingComponent" method="_on_body_entered"]

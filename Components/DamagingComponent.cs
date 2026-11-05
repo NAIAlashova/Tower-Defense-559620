@@ -4,6 +4,7 @@ using System;
 [GlobalClass]
 public partial class DamagingComponent : Area3D
 {
+    [Export]
     public string damagingGroup;
     [Export]
     public float damage{set; get;}

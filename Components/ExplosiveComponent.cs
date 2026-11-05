@@ -9,7 +9,6 @@ public partial class ExplosiveComponent : DamagingComponent
     public override void _Ready()
     {
         bulletParentNode = GetParent<CharacterBody3D>();
-        damagingGroup = "allies";
         damage = 70f;
     }
 
