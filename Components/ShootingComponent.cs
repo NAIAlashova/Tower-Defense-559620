@@ -47,7 +47,7 @@ public partial class ShootingComponent : Node
     protected virtual void ShootBullet()
     {
         Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
-        bulletInstance.Position = parentNode.Position;
+        bulletInstance.Position = parentNode.Position + new Vector3(0f, 1f, 0f);
         bool isAlly = parentNode.IsInGroup("allies");
         if (isAlly)
         {
