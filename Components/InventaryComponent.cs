@@ -55,6 +55,11 @@ public partial class InventaryComponent : Node
         UpdateCurrencyLabel();
     }
 
+    public bool CanBuildTower(int type_tower)
+    {
+        return currentResources >= TowersPrice[type_tower];
+    }
+
     private void UpdateCurrencyLabel()
     {
         currentCurrencyLabel.Text = $"Ресурсы: {currentResources}";

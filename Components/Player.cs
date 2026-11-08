@@ -150,12 +150,19 @@ public partial class Player : CharacterBody3D
         }
         else
         {
-            parentNode.GetNode<InventaryComponent>("InventaryComponent").DeleteResources(towerType);
+            if (parentNode.GetNode<InventaryComponent>("InventaryComponent").CanBuildTower(towerType))
+            {
+                PackedScene TowerScene = GD.Load<PackedScene>(typeTowerScene[towerType]);
+                CharacterBody3D TowerInstance = TowerScene.Instantiate<CharacterBody3D>();
+                TowerInstance.Position = testTowerInstance.GlobalPosition;
+                AddSibling(TowerInstance);
 
-            PackedScene TowerScene = GD.Load<PackedScene>(typeTowerScene[towerType]);
-            CharacterBody3D TowerInstance = TowerScene.Instantiate<CharacterBody3D>();
-            TowerInstance.Position = testTowerInstance.GlobalPosition;
-            AddSibling(TowerInstance);
+                parentNode.GetNode<InventaryComponent>("InventaryComponent").DeleteResources(towerType);
+            }
+            else
+            {
+                GD.Print("Недостаточно ресурсов для постройки башни.");
+            }
 
             ConstructionLabel.Visible = false;
             testTowerInstance.QueueFree();
