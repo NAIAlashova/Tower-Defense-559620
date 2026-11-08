@@ -75,7 +75,7 @@ public partial class MoveComponent : Node
             isSlowed = true;
             Speed = Speed / 4;
             timerSlow = new Timer();
-            timerSlow.WaitTime = 4;
+            timerSlow.WaitTime = 20;
             timerSlow.OneShot = true;
             AddChild(timerSlow);
             timerSlow.Start();
