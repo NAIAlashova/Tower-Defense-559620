@@ -9,9 +9,9 @@ public partial class TrackerComponent : Node
 
     public virtual void DieObject(Node3D body)
     {
-        if (body is Player)
+        if (body is Player | body is Core)
         {
-            /// Удаляем всю сцену
+              GetTree().CurrentScene.QueueFree();
         }
         else
         {

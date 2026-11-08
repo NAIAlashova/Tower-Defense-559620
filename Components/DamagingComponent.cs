@@ -2,20 +2,29 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class DamagingComponent : Node
+public partial class DamagingComponent : Area3D
 {
+    [Export]
     public string damagingGroup;
     [Export]
     public float damage{set; get;}
     public Node3D shootedNode;
-    private Node3D bulletParentNode;
+    protected Node3D bulletParentNode;
 
     public override void _Ready()
     {
         bulletParentNode = GetParent<Area3D>();
     }
 
-    public void Hit(Node3D body)
+    public void _on_body_entered(Node3D body)
+    {
+        if (body.IsInGroup(damagingGroup))
+        {
+            Hit(body);
+        }
+    }
+
+    private void Hit(Node3D body)
     {
         if (body.IsInGroup(damagingGroup))
         {
@@ -27,7 +36,6 @@ public partial class DamagingComponent : Node
         {
             bulletParentNode.QueueFree();
         }
-        GD.Print("Damage");
     }
 
     protected virtual void Damage(Node3D enemy)

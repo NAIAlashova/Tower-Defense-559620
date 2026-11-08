@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bcr03rjgunejc" path="res://Components/Bullet.cs" id="1_xjght"]
 [ext_resource type="Script" uid="uid://ql438jyp4ub" path="res://Components/DamagingComponent.cs" id="2_oduel"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
+radius = 0.119628906
+height = 0.5523834
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b3wu"]
 albedo_color = Color(0.68781614, 0.12438489, 0.2895369, 1)
 
@@ -11,25 +15,25 @@ material = SubResource("StandardMaterial3D_0b3wu")
 radius = 0.1
 height = 0.5
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
-radius = 0.119628906
-height = 0.5523834
-
 [node name="Bullet" type="Area3D" unique_id=1598322752]
 script = ExtResource("1_xjght")
 BulletSpeed = 10.0
 metadata/_custom_type_script = "uid://bcr03rjgunejc"
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1692214374]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=327785231]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_4kxuq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=983349035]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_4kxuq")
-
-[node name="DamagingComponent" type="Node" parent="." unique_id=988145139]
+[node name="DamagingComponent" type="Area3D" parent="." unique_id=1755036675]
 script = ExtResource("2_oduel")
 metadata/_custom_type_script = "uid://ql438jyp4ub"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamagingComponent" unique_id=983349035]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[connection signal="body_entered" from="DamagingComponent" to="DamagingComponent" method="_on_body_entered"]
