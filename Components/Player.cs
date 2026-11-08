@@ -10,6 +10,11 @@ public partial class Player : CharacterBody3D
     private int isDo = 1;
     private Timer timerSlow;
     private bool isSlowed {set; get;} = false;
+    [Export]
+    protected PackedScene TestTowerScene;
+    [Export]
+    private Label ConstructionLabel;
+    private CharacterBody3D testTowerInstance;
 
     public override void _Ready()
     {
@@ -108,10 +113,19 @@ public partial class Player : CharacterBody3D
         if (isDo == -1)
         {
             /// Создаём меню
+            testTowerInstance = TestTowerScene.Instantiate<CharacterBody3D>();
+            testTowerInstance.Position = parentNode.Position + new Vector3(0f, 0f, -1f);
+            AddChild(testTowerInstance);
+
+            ConstructionLabel.Visible = true;
+            /// Выбор типа башни
+            
         }
         else
         {
-            /// Удаляем меню
+            /// Удаляем меню подсказки
+            ConstructionLabel.Visible = false;
+            testTowerInstance.QueueFree();
         }
     }
 

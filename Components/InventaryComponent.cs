@@ -8,13 +8,16 @@ public partial class InventaryComponent : Node
     private int MaxResources = 500;
     private int currentResources;
     [Export]
+    protected Label currentCurrencyLabel;
+    [Export]
     private int InitialResources = 100;
     /// <summary>
     /// Цена постройки башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingСomponent
+    /// 2 - Башня с ExplosiveСomponent
     /// </summary>
-    private int[] TowersPrice = [100, 120];
+    private int[] TowersPrice = [100, 120, 220];
     /// <summary>
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingComponent
@@ -25,6 +28,7 @@ public partial class InventaryComponent : Node
     public override void _Ready()
     {
         currentResources = InitialResources;
+        UpdateCurrencyLabel();
     }
 
     public virtual void AddResources(Node3D tower)
@@ -46,10 +50,17 @@ public partial class InventaryComponent : Node
 
             }
         }
+        UpdateCurrencyLabel();
     }
 
     public virtual void DeleteResources(int type_tower)
     {
         currentResources = currentResources - TowersPrice[type_tower];
+        UpdateCurrencyLabel();
+    }
+
+    private void UpdateCurrencyLabel()
+    {
+        currentCurrencyLabel.Text = currentResources.ToString();
     }
 }
