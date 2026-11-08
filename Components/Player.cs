@@ -15,6 +15,10 @@ public partial class Player : CharacterBody3D
     [Export]
     private Label ConstructionLabel;
     private CharacterBody3D testTowerInstance;
+    private int towerType = 0;
+    private string[] typeTowerScene = ["res://Scenes/tower(t1).tscn", 
+    "res://Scenes/tower(t2).tscn", 
+    "res://Scenes/tower(t3).tscn"];
 
     public override void _Ready()
     {
@@ -87,24 +91,37 @@ public partial class Player : CharacterBody3D
 
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsActionJustPressed("pause"))
+        if (@event.IsEcho())
+            return;
+
+        if (@event.IsActionPressed("pause"))
         {
+            // Одно переключение на одно нажатие F.
+            isDo *= -1;
+
             foreach (var sibling in parentNode.GetChildren())
             {
-                isDo = isDo * -1;
                 foreach (var component in sibling.GetChildren())
                 {
                     if (component is MoveComponent moveComponent)
-                    {
                         moveComponent.Pause();
-                    }
                     else if (component is ShootingComponent shootingComponent)
-                    {
                         shootingComponent.Pause();
-                    }
                 }
-                InstanceMenu();
             }
+
+            // Один вызов после обхода всех компонентов.
+            InstanceMenu();
+        }
+
+        if (isDo == -1)
+        {
+            if (@event.IsActionPressed("tower_type1"))
+                towerType = 0;
+            else if (@event.IsActionPressed("tower_type2"))
+                towerType = 1;
+            else if (@event.IsActionPressed("tower_type3"))
+                towerType = 2;
         }
     }
 
@@ -118,12 +135,17 @@ public partial class Player : CharacterBody3D
             AddChild(testTowerInstance);
 
             ConstructionLabel.Visible = true;
-            /// Выбор типа башни
-            
+            /// Выбор типа башни происходит в методе _Input
         }
         else
         {
-            /// Удаляем меню подсказки
+            parentNode.GetNode<InventaryComponent>("InventaryComponent").DeleteResources(towerType);
+
+            PackedScene TowerScene = GD.Load<PackedScene>(typeTowerScene[towerType]);
+            CharacterBody3D TowerInstance = TowerScene.Instantiate<CharacterBody3D>();
+            TowerInstance.Position = testTowerInstance.GlobalPosition;
+            AddSibling(TowerInstance);
+
             ConstructionLabel.Visible = false;
             testTowerInstance.QueueFree();
         }

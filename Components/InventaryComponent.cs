@@ -16,14 +16,12 @@ public partial class InventaryComponent : Node
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingСomponent
     /// 2 - Башня с ExplosiveСomponent
-    /// </summary>
     private int[] TowersPrice = [100, 120, 220];
-    /// <summary>
+    /// Приз за уничтожение башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingComponent
     /// 2 - Башня с ExplosiveСomponent
-    /// </summary>
-    private int[] TowersAward = [100, 120, 200];
+    private int[] TowersAward = [110, 120, 200];
 
     public override void _Ready()
     {
@@ -42,12 +40,10 @@ public partial class InventaryComponent : Node
             if (component is SlowingComponent)
             {
                 currentResources = currentResources + TowersAward[1];
-                break;
             }
             if (component is ExplosiveComponent)
             {
                 currentResources = currentResources + TowersAward[2];
-
             }
         }
         UpdateCurrencyLabel();

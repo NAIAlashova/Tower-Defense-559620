@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower(t1).tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://dwlql5jihgull" path="res://Scenes/enemy_tower(t3).tscn" id="1_uc7fm"]
-[ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower.tscn" id="2_ufl4h"]
+[ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower(t1).tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://cty4p7vaoqhkf" path="res://Scenes/player.tscn" id="3_58y5n"]
 [ext_resource type="Script" uid="uid://csxdi8aulef8j" path="res://Components/TrackerComponent.cs" id="4_4ksr6"]
 [ext_resource type="PackedScene" uid="uid://bsmqqus8xjf06" path="res://Scenes/testTower.tscn" id="4_orcbb"]
