@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://24pint26tctv" path="res://Components/InventaryComponent.cs" id="5_uc7fm"]
 [ext_resource type="PackedScene" uid="uid://bopmbls88riy8" path="res://Scenes/enemy_tower(t2).tscn" id="7_56e3h"]
 [ext_resource type="PackedScene" uid="uid://dit837ntpsc88" path="res://Scenes/Core.tscn" id="8_eumj5"]
+[ext_resource type="PackedScene" uid="uid://bqhwgyhuhlrf6" path="res://Scenes/tower(t2).tscn" id="9_sbiut"]
 
 [sub_resource type="Environment" id="Environment_4kxuq"]
 
@@ -60,7 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3220067, 0, -8.210842)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1771994, 0, 9.212641)
 
 [node name="Player" parent="." unique_id=2068096347 instance=ExtResource("3_58y5n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="TrackerComponent" type="Node" parent="." unique_id=1616083502 node_paths=PackedStringArray("inventaryNode")]
 script = ExtResource("4_4ksr6")
@@ -80,3 +81,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 0.039)
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1168122468]
 transform = Transform3D(-4.371139e-08, 0.76604444, -0.64278764, 0, 0.64278764, 0.76604444, 1, 3.3484866e-08, -2.809714e-08, -10, 8, 0)
 current = true
+
+[node name="TimeTower" parent="." unique_id=1042286828 instance=ExtResource("9_sbiut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
