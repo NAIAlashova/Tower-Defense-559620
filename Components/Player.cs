@@ -14,6 +14,8 @@ public partial class Player : CharacterBody3D
     protected PackedScene TestTowerScene;
     [Export]
     private Label ConstructionLabel;
+    [Export]
+    private Label HealthLabel;
     private CharacterBody3D testTowerInstance;
     private int towerType = 0;
     private string[] typeTowerScene = ["res://Scenes/tower(t1).tscn", 
@@ -22,7 +24,16 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
-      parentNode = GetParent<Node3D>();  
+      parentNode = GetParent<Node3D>();
+      var health = GetNode<HealthComponent>("HealthComponent");
+      health.HealthChanged += UpdateHealthLabel;
+      UpdateHealthLabel(health.CurrentHealth);
+    }
+
+    private void UpdateHealthLabel(float health)
+    {
+        if (HealthLabel != null)
+            HealthLabel.Text = $"Здоровье: {Mathf.Max(0f, health):0.#}";
     }
 
     public override void _PhysicsProcess(double delta)

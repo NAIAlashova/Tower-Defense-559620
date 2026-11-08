@@ -8,7 +8,8 @@ public partial class HealthComponent : Node
     private TrackerComponent trackerComponent;
     [Export]
     protected float MaxHealth {get; set; } = 100f;
-    protected float CurrentHealth {get; set; }
+    public float CurrentHealth { get; private set; }
+    public event Action<float> HealthChanged;
     
     public override void _Ready()
     {
@@ -26,6 +27,7 @@ public partial class HealthComponent : Node
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+        HealthChanged?.Invoke(CurrentHealth);
         if (CurrentHealth < 1)
         {
             Die();

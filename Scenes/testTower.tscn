@@ -2,7 +2,7 @@
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_dscfh"]
 transparency = 1
-albedo_color = Color(0.43137255, 0.6666667, 0.23529412, 0.50980395)
+albedo_color = Color(0, 0, 0, 0.50980395)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0gjsk"]
 material = SubResource("ORMMaterial3D_dscfh")

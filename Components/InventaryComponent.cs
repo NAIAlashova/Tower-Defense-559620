@@ -57,6 +57,6 @@ public partial class InventaryComponent : Node
 
     private void UpdateCurrencyLabel()
     {
-        currentCurrencyLabel.Text = currentResources.ToString();
+        currentCurrencyLabel.Text = $"Ресурсы: {currentResources}";
     }
 }

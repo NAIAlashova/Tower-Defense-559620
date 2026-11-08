@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower(t1).tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://dwlql5jihgull" path="res://Scenes/enemy_tower(t3).tscn" id="1_uc7fm"]
-[ext_resource type="PackedScene" uid="uid://dli1bqmix0erf" path="res://Scenes/tower(t1).tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://cty4p7vaoqhkf" path="res://Scenes/player.tscn" id="3_58y5n"]
 [ext_resource type="Script" uid="uid://csxdi8aulef8j" path="res://Components/TrackerComponent.cs" id="4_4ksr6"]
 [ext_resource type="PackedScene" uid="uid://bsmqqus8xjf06" path="res://Scenes/testTower.tscn" id="4_orcbb"]
@@ -55,21 +54,18 @@ metadata/_custom_type_script = "uid://csxdi8aulef8j"
 
 [node name="InventaryComponent" type="Node" parent="." unique_id=626716244 node_paths=PackedStringArray("currentCurrencyLabel")]
 script = ExtResource("5_uc7fm")
-currentCurrencyLabel = NodePath("../CanvasLayer/VBoxContainer/CurrencuLabel")
+currentCurrencyLabel = NodePath("../CanvasLayer/CurrencuLabel")
 metadata/_custom_type_script = "uid://24pint26tctv"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115481689]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1689601488]
-anchors_preset = -1
-offset_right = 288.0
-offset_bottom = 153.0
-
-[node name="CurrencuLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=919845457]
-layout_mode = 2
-text = "
-"
-label_settings = SubResource("LabelSettings_sbiut")
+offset_left = 5.0
+offset_top = 45.0
+offset_right = 285.0
+offset_bottom = 265.0
+mouse_filter = 2
+theme_override_constants/separation = 4
 
 [node name="HelpLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=488291498]
 layout_mode = 2
@@ -91,10 +87,35 @@ text = "1 - стандартная
  повторно нажниме F"
 label_settings = SubResource("LabelSettings_sbiut")
 
-[node name="Player" parent="." unique_id=2068096347 node_paths=PackedStringArray("ConstructionLabel") instance=ExtResource("3_58y5n")]
+[node name="CurrencuLabel" type="Label" parent="CanvasLayer" unique_id=919845457]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 35.0
+offset_right = -5.0
+offset_bottom = 65.0
+grow_horizontal = 0
+text = "Ресурсы: 100"
+label_settings = SubResource("LabelSettings_sbiut")
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer" unique_id=1299192325]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 35.0
+grow_horizontal = 0
+text = "Здоровье: 300"
+label_settings = SubResource("LabelSettings_sbiut")
+
+[node name="Player" parent="." unique_id=2068096347 node_paths=PackedStringArray("ConstructionLabel", "HealthLabel") instance=ExtResource("3_58y5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 TestTowerScene = ExtResource("4_orcbb")
 ConstructionLabel = NodePath("../CanvasLayer/VBoxContainer/ConstructionLabel")
+HealthLabel = NodePath("../CanvasLayer/HealthLabel")
 
 [node name="Core" parent="." unique_id=793690817 instance=ExtResource("8_eumj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 0.039)
@@ -102,26 +123,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 0.039)
 [node name="CharacterBody3D" parent="." unique_id=1805737031 instance=ExtResource("1_uc7fm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2096899, 0, -8.13081)
 
-[node name="Tower" parent="." unique_id=1813011361 instance=ExtResource("2_ufl4h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68528, 0, -3.4606712)
-
-[node name="Tower2" parent="." unique_id=659565859 instance=ExtResource("2_ufl4h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68528, 0, 3.5393288)
-
 [node name="EnemieTower" parent="." unique_id=110278794 instance=ExtResource("1_brycl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67836, 0, -3.2459269)
 
 [node name="EnemieTower2" parent="." unique_id=1728614070 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7755127, 0, 7.445733)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76623535, 0, 8.875663)
 
 [node name="EnemieTower3" parent="." unique_id=1990289897 instance=ExtResource("1_brycl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3220067, 0, -8.210842)
 
 [node name="EnemieTower4" parent="." unique_id=1355318387 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1771994, 0, 9.212641)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3337994, 0, 9.212641)
 
 [node name="EnemieTimeTower" parent="." unique_id=1891862802 instance=ExtResource("7_56e3h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32714, 0.09516621, 3.174861)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32714, 0.09516621, 3.7360497)
 
 [node name="TimeTower" parent="." unique_id=1042286828 instance=ExtResource("9_sbiut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
