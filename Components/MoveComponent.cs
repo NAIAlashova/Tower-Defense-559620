@@ -15,6 +15,7 @@ public partial class MoveComponent : Node
     private int isDo {set; get;} = 1;
     private Timer timerSlow;
     private bool isSlowed {set; get;} = false;
+    private bool isAntiSlowed = false;
 
     public override void _Ready()
     {
@@ -22,12 +23,15 @@ public partial class MoveComponent : Node
     }
     public override void _PhysicsProcess(double delta)
     {
-        if (timerSlow != null)
+        if (isSlowed && timerSlow != null)
         {
-            if (timerSlow.IsStopped())
+            if (timerSlow.IsStopped() & isAntiSlowed)
             {
                 Speed = Speed * 4;
                 isSlowed = false;
+                timerSlow.QueueFree();
+                timerSlow = null;
+                isAntiSlowed = false;
             }
         }
         if (!IsInstanceValid(Target))
@@ -79,6 +83,7 @@ public partial class MoveComponent : Node
             timerSlow.OneShot = true;
             AddChild(timerSlow);
             timerSlow.Start();
+            isAntiSlowed = true;
         }
     }
 }

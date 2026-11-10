@@ -16,6 +16,10 @@ public partial class Player : CharacterBody3D
     private Label ConstructionLabel;
     [Export]
     private Label HealthLabel;
+    [Export]
+    private Label CanConstructionLabel;
+    [Export]
+    private Timer CanConstructionTimer;
     private CharacterBody3D testTowerInstance;
     private int towerType = 0;
     private string[] typeTowerScene = ["res://Scenes/tower(t1).tscn", 
@@ -38,6 +42,10 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (CanConstructionTimer.IsStopped())
+        {
+            CanConstructionLabel.Visible = false;
+        }
         Move((float)delta);
         MoveAndSlide();
         RotateTowardsMouse();
@@ -161,7 +169,8 @@ public partial class Player : CharacterBody3D
             }
             else
             {
-                GD.Print("Недостаточно ресурсов для постройки башни.");
+                CanConstructionLabel.Visible = true;
+                CanConstructionTimer.Start();
             }
 
             ConstructionLabel.Visible = false;

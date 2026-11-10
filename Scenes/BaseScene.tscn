@@ -20,6 +20,10 @@
 line_spacing = 1.0
 shadow_color = Color(0.16078432, 0.22352941, 0.16862746, 0.41568628)
 
+[sub_resource type="LabelSettings" id="LabelSettings_orcbb"]
+line_spacing = 1.0
+shadow_color = Color(0.16078432, 0.22352941, 0.16862746, 0.41568628)
+
 [node name="BaseScene" type="Node3D" unique_id=1115954715]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1031824530]
@@ -57,6 +61,9 @@ script = ExtResource("5_uc7fm")
 currentCurrencyLabel = NodePath("../CanvasLayer/CurrencuLabel")
 InitialResources = 50
 metadata/_custom_type_script = "uid://24pint26tctv"
+
+[node name="CanConstructionTimer" type="Timer" parent="." unique_id=112966663]
+one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115481689]
 
@@ -100,6 +107,21 @@ grow_horizontal = 0
 text = "Ресурсы: 100"
 label_settings = SubResource("LabelSettings_sbiut")
 
+[node name="ConstructionLabel" type="Label" parent="CanvasLayer" unique_id=1381455476]
+visible = false
+anchors_preset = -1
+anchor_left = 0.697
+anchor_top = 0.333
+anchor_right = 0.697
+anchor_bottom = 0.333
+offset_left = -418.94403
+offset_top = 49.216003
+offset_right = -38.94403
+offset_bottom = 79.216
+grow_horizontal = 0
+text = "Недостаточно ресурсов для постройки Башни."
+label_settings = SubResource("LabelSettings_orcbb")
+
 [node name="HealthLabel" type="Label" parent="CanvasLayer" unique_id=1299192325]
 anchors_preset = 1
 anchor_left = 1.0
@@ -112,11 +134,13 @@ grow_horizontal = 0
 text = "Здоровье: 300"
 label_settings = SubResource("LabelSettings_sbiut")
 
-[node name="Player" parent="." unique_id=2068096347 node_paths=PackedStringArray("ConstructionLabel", "HealthLabel") instance=ExtResource("3_58y5n")]
+[node name="Player" parent="." unique_id=2068096347 node_paths=PackedStringArray("ConstructionLabel", "HealthLabel", "CanConstructionLabel", "CanConstructionTimer") instance=ExtResource("3_58y5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 TestTowerScene = ExtResource("4_orcbb")
 ConstructionLabel = NodePath("../CanvasLayer/VBoxContainer/ConstructionLabel")
 HealthLabel = NodePath("../CanvasLayer/HealthLabel")
+CanConstructionLabel = NodePath("../CanvasLayer/ConstructionLabel")
+CanConstructionTimer = NodePath("../CanConstructionTimer")
 
 [node name="Core" parent="." unique_id=793690817 instance=ExtResource("8_eumj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 0.039)

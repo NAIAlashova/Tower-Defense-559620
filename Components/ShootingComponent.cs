@@ -78,4 +78,9 @@ public partial class ShootingComponent : Node
     {
         isDo = isDo * -1;
     }
+
+    public PackedScene CheckOfType()
+    {
+        return BulletScene;
+    }
 }

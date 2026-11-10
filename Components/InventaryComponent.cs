@@ -10,6 +10,8 @@ public partial class InventaryComponent : Node
     [Export]
     protected Label currentCurrencyLabel;
     [Export]
+    private PackedScene StandartBullet;
+    [Export]
     private int InitialResources = 100;
     /// <summary>
     /// Цена постройки башен
@@ -33,13 +35,16 @@ public partial class InventaryComponent : Node
     {
         foreach (var component in tower.GetChildren())
         {
-            if (component is ShootingComponent)
+            if (component is ShootingComponent shooter)
             {
-                currentResources = currentResources + TowersAward[0];
-            }
-            if (component is SlowingComponent)
-            {
-                currentResources = currentResources + TowersAward[1];
+                if (shooter.CheckOfType() == StandartBullet)
+                {
+                    currentResources = currentResources + TowersAward[0];
+                }
+                else
+                {
+                    currentResources = currentResources + TowersAward[1];
+                }
             }
             if (component is ExplosiveComponent)
             {
