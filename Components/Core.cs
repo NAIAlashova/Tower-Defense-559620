@@ -2,6 +2,6 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class Core : Node3D
+public partial class Core : CharacterBody3D
 {
 }

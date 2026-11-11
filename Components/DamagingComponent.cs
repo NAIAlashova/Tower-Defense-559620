@@ -16,26 +16,23 @@ public partial class DamagingComponent : Area3D
         bulletParentNode = GetParent<Area3D>();
     }
 
-    public void _on_body_entered(Node3D body)
+    public virtual void _on_body_entered(Node3D body)
     {
         if (body.IsInGroup(damagingGroup))
         {
             Hit(body);
         }
-    }
-
-    private void Hit(Node3D body)
-    {
-        if (body.IsInGroup(damagingGroup))
-        {
-            GD.Print("in enemie");
-            Damage(body);
-            bulletParentNode.QueueFree();
-        }
         else if (body != shootedNode && body != bulletParentNode)
         {
             bulletParentNode.QueueFree();
         }
+    }
+
+    protected virtual void Hit(Node3D body)
+    {
+        GD.Print($"{bulletParentNode.Name} in enemie");
+        Damage(body);
+        bulletParentNode.QueueFree();
     }
 
     protected virtual void Damage(Node3D enemy)
@@ -48,6 +45,5 @@ public partial class DamagingComponent : Area3D
                     break;
                 }
             }
-        // Наложение визуальных эффектов на врага
     }
 }

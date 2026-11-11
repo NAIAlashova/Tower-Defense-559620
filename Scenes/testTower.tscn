@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bsmqqus8xjf06"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_dscfh"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.50980395)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0gjsk"]
+material = SubResource("ORMMaterial3D_dscfh")
+top_radius = 0.3
+bottom_radius = 0.65
+
+[node name="Tower" type="CharacterBody3D" unique_id=1813011361 groups=["allies"]]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=386652505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.004727, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1771860733]
+mesh = SubResource("CylinderMesh_0gjsk")

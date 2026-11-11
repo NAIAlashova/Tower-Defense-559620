@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dpfnh1pmjfj45"]
+
+[ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_8xaj6"]
+[ext_resource type="Script" uid="uid://dty27dot5d7gg" path="res://Components/ExplosiveComponent.cs" id="3_ioywm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jugqt"]
+height = 1.0092773
+radius = 0.54345703
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kxuq"]
+radius = 0.93878174
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_lj8g7"]
+albedo_color = Color(0.5838376, 0.5895611, 0.30644384, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_we3hm"]
+material = SubResource("ORMMaterial3D_lj8g7")
+top_radius = 0.36621094
+bottom_radius = 0.36621094
+height = 0.4
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1805737031 groups=["allies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=998196156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49536133, 0)
+shape = SubResource("CylinderShape3D_jugqt")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1973516348]
+script = ExtResource("2_8xaj6")
+MaxHealth = 70.0
+metadata/_custom_type_script = "uid://c0gluegirdvt8"
+
+[node name="ExplosiveComponent" type="Area3D" parent="." unique_id=1205519532 groups=["enemies"]]
+script = ExtResource("3_ioywm")
+damagingGroup = "enemies"
+metadata/_custom_type_script = "uid://dty27dot5d7gg"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosiveComponent" unique_id=884091525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("SphereShape3D_4kxuq")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=769659019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18435335, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=888459488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CylinderMesh_we3hm")
+
+[connection signal="body_entered" from="ExplosiveComponent" to="ExplosiveComponent" method="_on_body_entered"]

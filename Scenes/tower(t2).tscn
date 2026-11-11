@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bqhwgyhuhlrf6"]
+
+[ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_qg78c"]
+[ext_resource type="Script" uid="uid://bepbllqttmf85" path="res://Components/VisibleComponent.cs" id="3_0l87s"]
+[ext_resource type="Script" uid="uid://cqrefvsfgnkbp" path="res://Components/ShootingComponent.cs" id="4_gkawr"]
+[ext_resource type="PackedScene" uid="uid://bm7qlcvox1xj4" path="res://Scenes/time_bullet.tscn" id="5_reohk"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xlgcr"]
+radius = 0.66503906
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_p5dj7"]
+albedo_color = Color(0.11478529, 0.48339194, 0.59578276, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hwtir"]
+material = SubResource("ORMMaterial3D_p5dj7")
+top_radius = 0.3
+bottom_radius = 0.65
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c1wm8"]
+radius = 17.0
+
+[node name="TimeTower" type="CharacterBody3D" unique_id=1728614070 groups=["allies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=252816603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81727004, 0)
+shape = SubResource("CylinderShape3D_xlgcr")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1676715693]
+script = ExtResource("2_qg78c")
+metadata/_custom_type_script = "uid://c0gluegirdvt8"
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1146474925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81727004, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=783871015]
+mesh = SubResource("CylinderMesh_hwtir")
+
+[node name="VisibleComponent" type="Area3D" parent="." unique_id=1911223298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20398593, 0)
+script = ExtResource("3_0l87s")
+metadata/_custom_type_script = "uid://bepbllqttmf85"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibleComponent" unique_id=1216920659]
+shape = SubResource("SphereShape3D_c1wm8")
+
+[node name="ShootingComponent" type="Node" parent="." unique_id=1660824504 node_paths=PackedStringArray("visibleComponent")]
+script = ExtResource("4_gkawr")
+visibleComponent = NodePath("../VisibleComponent")
+BulletScene = ExtResource("5_reohk")
+metadata/_custom_type_script = "uid://cqrefvsfgnkbp"

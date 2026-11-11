@@ -10,14 +10,42 @@ public partial class Player : CharacterBody3D
     private int isDo = 1;
     private Timer timerSlow;
     private bool isSlowed {set; get;} = false;
+    [Export]
+    protected PackedScene TestTowerScene;
+    [Export]
+    private Label ConstructionLabel;
+    [Export]
+    private Label HealthLabel;
+    [Export]
+    private Label CanConstructionLabel;
+    [Export]
+    private Timer CanConstructionTimer;
+    private CharacterBody3D testTowerInstance;
+    private int towerType = 0;
+    private string[] typeTowerScene = ["res://Scenes/tower(t1).tscn", 
+    "res://Scenes/tower(t2).tscn", 
+    "res://Scenes/tower(t3).tscn"];
 
     public override void _Ready()
     {
-      parentNode = GetParent<Node3D>();  
+      parentNode = GetParent<Node3D>();
+      var health = GetNode<HealthComponent>("HealthComponent");
+      health.HealthChanged += UpdateHealthLabel;
+      UpdateHealthLabel(health.CurrentHealth);
+    }
+
+    private void UpdateHealthLabel(float health)
+    {
+        if (HealthLabel != null)
+            HealthLabel.Text = $"Здоровье: {Mathf.Max(0f, health):0.#}";
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (CanConstructionTimer.IsStopped())
+        {
+            CanConstructionLabel.Visible = false;
+        }
         Move((float)delta);
         MoveAndSlide();
         RotateTowardsMouse();
@@ -82,24 +110,35 @@ public partial class Player : CharacterBody3D
 
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsActionJustPressed("pause"))
+        if (@event.IsEcho())
+            return;
+
+        if (@event.IsActionPressed("pause"))
         {
+            // Одно переключение на одно нажатие F.
+            isDo *= -1;
+
             foreach (var sibling in parentNode.GetChildren())
             {
-                isDo = isDo * -1;
                 foreach (var component in sibling.GetChildren())
                 {
                     if (component is MoveComponent moveComponent)
-                    {
                         moveComponent.Pause();
-                    }
                     else if (component is ShootingComponent shootingComponent)
-                    {
                         shootingComponent.Pause();
-                    }
                 }
-                InstanceMenu();
             }
+            InstanceMenu();
+        }
+
+        if (isDo == -1)
+        {
+            if (@event.IsActionPressed("tower_type1"))
+                towerType = 0;
+            else if (@event.IsActionPressed("tower_type2"))
+                towerType = 1;
+            else if (@event.IsActionPressed("tower_type3"))
+                towerType = 2;
         }
     }
 
@@ -108,10 +147,32 @@ public partial class Player : CharacterBody3D
         if (isDo == -1)
         {
             /// Создаём меню
+            testTowerInstance = TestTowerScene.Instantiate<CharacterBody3D>();
+            testTowerInstance.Position = parentNode.Position + new Vector3(0f, 0f, -1f);
+            AddChild(testTowerInstance);
+
+            ConstructionLabel.Visible = true;
+            /// Выбор типа башни происходит в методе _Input
         }
         else
         {
-            /// Удаляем меню
+            if (parentNode.GetNode<InventaryComponent>("InventaryComponent").CanBuildTower(towerType))
+            {
+                PackedScene TowerScene = GD.Load<PackedScene>(typeTowerScene[towerType]);
+                CharacterBody3D TowerInstance = TowerScene.Instantiate<CharacterBody3D>();
+                TowerInstance.Position = testTowerInstance.GlobalPosition;
+                AddSibling(TowerInstance);
+
+                parentNode.GetNode<InventaryComponent>("InventaryComponent").DeleteResources(towerType);
+            }
+            else
+            {
+                CanConstructionLabel.Visible = true;
+                CanConstructionTimer.Start();
+            }
+
+            ConstructionLabel.Visible = false;
+            testTowerInstance.QueueFree();
         }
     }
 
@@ -135,6 +196,10 @@ public partial class Player : CharacterBody3D
                 if (!timerSlow.IsStopped())
                 {
                     _velocity = _velocity / 3;
+                }
+                else
+                {
+                    isSlowed = false;
                 }
             }
         return _velocity;

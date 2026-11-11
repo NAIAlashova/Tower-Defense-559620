@@ -8,48 +8,68 @@ public partial class InventaryComponent : Node
     private int MaxResources = 500;
     private int currentResources;
     [Export]
+    protected Label currentCurrencyLabel;
+    [Export]
+    private PackedScene StandartBullet = GD.Load<PackedScene>("res://Scenes/bullet.tscn");
+    [Export]
     private int InitialResources = 100;
-    /// <summary>
+    
     /// Цена постройки башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingСomponent
-    /// </summary>
-    private int[] TowersPrice = [100, 120];
-    /// <summary>
+    /// 2 - Башня с ExplosiveСomponent
+    private int[] TowersPrice = [100, 120, 220];
+
+    /// Приз за уничтожение башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingComponent
     /// 2 - Башня с ExplosiveСomponent
-    /// </summary>
-    private int[] TowersAward = [100, 120, 200];
+    private int[] TowersAward = [110, 120, 200];
 
     public override void _Ready()
     {
         currentResources = InitialResources;
+        UpdateCurrencyLabel();
     }
 
     public virtual void AddResources(Node3D tower)
     {
         foreach (var component in tower.GetChildren())
         {
-            if (component is ShootingComponent)
+            if (component is ShootingComponent shooter)
             {
-                currentResources = currentResources + TowersAward[0];
-            }
-            if (component is SlowingComponent)
-            {
-                currentResources = currentResources + TowersAward[1];
+                if (shooter.CheckOfType() == StandartBullet)
+                {
+                    currentResources = currentResources + TowersAward[0];
+                }
+                else
+                {
+                    currentResources = currentResources + TowersAward[1];
+                }
                 break;
             }
             if (component is ExplosiveComponent)
             {
                 currentResources = currentResources + TowersAward[2];
-
+                break;
             }
         }
+        UpdateCurrencyLabel();
     }
 
     public virtual void DeleteResources(int type_tower)
     {
         currentResources = currentResources - TowersPrice[type_tower];
+        UpdateCurrencyLabel();
+    }
+
+    public bool CanBuildTower(int type_tower)
+    {
+        return currentResources >= TowersPrice[type_tower];
+    }
+
+    private void UpdateCurrencyLabel()
+    {
+        currentCurrencyLabel.Text = $"Ресурсы: {currentResources}";
     }
 }
