@@ -21,6 +21,10 @@ shadow_color = Color(0.16078432, 0.22352941, 0.16862746, 0.41568628)
 line_spacing = 1.0
 shadow_color = Color(0.16078432, 0.22352941, 0.16862746, 0.41568628)
 
+[sub_resource type="LabelSettings" id="LabelSettings_uc7fm"]
+line_spacing = 1.0
+shadow_color = Color(0.16078432, 0.22352941, 0.16862746, 0.41568628)
+
 [node name="BaseScene" type="Node3D" unique_id=1115954715]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1031824530]
@@ -48,14 +52,15 @@ shape = SubResource("BoxShape3D_mti6b")
 transform = Transform3D(-4.371139e-08, 0.76604444, -0.64278764, 0, 0.64278764, 0.76604444, 1, 3.3484866e-08, -2.809714e-08, -10, 8, 0)
 current = true
 
-[node name="TrackerComponent" type="Node" parent="." unique_id=1616083502 node_paths=PackedStringArray("inventaryNode")]
+[node name="TrackerComponent" type="Node" parent="." unique_id=1616083502 node_paths=PackedStringArray("inventaryNode", "EndLabel")]
 script = ExtResource("4_4ksr6")
 inventaryNode = NodePath("../InventaryComponent")
+EndLabel = NodePath("../CanvasLayer/EndLabel")
 metadata/_custom_type_script = "uid://csxdi8aulef8j"
 
 [node name="InventaryComponent" type="Node" parent="." unique_id=626716244 node_paths=PackedStringArray("currentCurrencyLabel")]
 script = ExtResource("5_uc7fm")
-currentCurrencyLabel = NodePath("../CanvasLayer/CurrencuLabel")
+currentCurrencyLabel = NodePath("../CanvasLayer/InfoLabel/CurrencuLabel")
 metadata/_custom_type_script = "uid://24pint26tctv"
 
 [node name="CanConstructionTimer" type="Timer" parent="." unique_id=112966663]
@@ -63,7 +68,7 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115481689]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1689601488]
+[node name="Подсказки" type="VBoxContainer" parent="CanvasLayer" unique_id=1689601488]
 offset_left = 5.0
 offset_top = 45.0
 offset_right = 285.0
@@ -71,7 +76,7 @@ offset_bottom = 265.0
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="HelpLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=488291498]
+[node name="HelpLabel" type="Label" parent="CanvasLayer/Подсказки" unique_id=488291498]
 layout_mode = 2
 text = "Управление - WASD
 Стрельба - E
@@ -79,7 +84,7 @@ text = "Управление - WASD
 "
 label_settings = SubResource("LabelSettings_sbiut")
 
-[node name="ConstructionLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1530955278]
+[node name="ConstructionLabel" type="Label" parent="CanvasLayer/Подсказки" unique_id=1530955278]
 visible = false
 layout_mode = 2
 text = "1 - стандартная 
@@ -94,16 +99,25 @@ text = "1 - стандартная
  повторно нажниме F"
 label_settings = SubResource("LabelSettings_sbiut")
 
-[node name="CurrencuLabel" type="Label" parent="CanvasLayer" unique_id=919845457]
-anchors_preset = 1
+[node name="InfoLabel" type="VBoxContainer" parent="CanvasLayer" unique_id=1180603292]
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_top = 35.0
-offset_right = -5.0
-offset_bottom = 65.0
-grow_horizontal = 0
+offset_left = -233.4046
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 55.80417
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="CurrencuLabel" type="Label" parent="CanvasLayer/InfoLabel" unique_id=919845457]
+layout_mode = 2
 text = "Ресурсы: 100"
+label_settings = SubResource("LabelSettings_sbiut")
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/InfoLabel" unique_id=1299192325]
+layout_mode = 2
+text = "Здоровье: 300"
 label_settings = SubResource("LabelSettings_sbiut")
 
 [node name="ConstructionLabel" type="Label" parent="CanvasLayer" unique_id=1381455476]
@@ -121,23 +135,25 @@ grow_horizontal = 0
 text = "Недостаточно ресурсов для постройки Башни."
 label_settings = SubResource("LabelSettings_orcbb")
 
-[node name="HealthLabel" type="Label" parent="CanvasLayer" unique_id=1299192325]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -180.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = 35.0
+[node name="EndLabel" type="Label" parent="CanvasLayer" unique_id=1646816827]
+visible = false
+anchors_preset = -1
+anchor_left = 0.629
+anchor_top = 0.36
+anchor_right = 0.629
+anchor_bottom = 0.36
+offset_left = -239.60803
+offset_top = 34.719986
+offset_right = 0.39196777
+offset_bottom = 109.719986
 grow_horizontal = 0
-text = "Здоровье: 300"
-label_settings = SubResource("LabelSettings_sbiut")
+label_settings = SubResource("LabelSettings_uc7fm")
 
 [node name="Player" parent="." unique_id=2068096347 node_paths=PackedStringArray("ConstructionLabel", "HealthLabel", "CanConstructionLabel", "CanConstructionTimer") instance=ExtResource("3_58y5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 TestTowerScene = ExtResource("4_orcbb")
-ConstructionLabel = NodePath("../CanvasLayer/VBoxContainer/ConstructionLabel")
-HealthLabel = NodePath("../CanvasLayer/HealthLabel")
+ConstructionLabel = NodePath("../CanvasLayer/Подсказки/ConstructionLabel")
+HealthLabel = NodePath("../CanvasLayer/InfoLabel/HealthLabel")
 CanConstructionLabel = NodePath("../CanvasLayer/ConstructionLabel")
 CanConstructionTimer = NodePath("../CanConstructionTimer")
 
