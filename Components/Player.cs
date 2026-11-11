@@ -128,8 +128,6 @@ public partial class Player : CharacterBody3D
                         shootingComponent.Pause();
                 }
             }
-
-            // Один вызов после обхода всех компонентов.
             InstanceMenu();
         }
 
@@ -198,6 +196,10 @@ public partial class Player : CharacterBody3D
                 if (!timerSlow.IsStopped())
                 {
                     _velocity = _velocity / 3;
+                }
+                else
+                {
+                    isSlowed = false;
                 }
             }
         return _velocity;

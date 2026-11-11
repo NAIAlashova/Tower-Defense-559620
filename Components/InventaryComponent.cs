@@ -13,12 +13,13 @@ public partial class InventaryComponent : Node
     private PackedScene StandartBullet;
     [Export]
     private int InitialResources = 100;
-    /// <summary>
+    
     /// Цена постройки башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingСomponent
     /// 2 - Башня с ExplosiveСomponent
     private int[] TowersPrice = [100, 120, 220];
+
     /// Приз за уничтожение башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingComponent

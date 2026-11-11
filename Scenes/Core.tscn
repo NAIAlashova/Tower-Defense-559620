@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dit837ntpsc88"]
 
+[ext_resource type="Script" uid="uid://kxisevks3ykr" path="res://Components/Core.cs" id="1_ec8af"]
 [ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_ec8af"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_mti6b"]
@@ -16,7 +17,9 @@ height = 2.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kxuq"]
 radius = 1.2534972
 
-[node name="Core" type="CharacterBody3D" unique_id=1219051994 groups=["allies"]]
+[node name="Core" type="CharacterBody3D" unique_id=1461727278 groups=["allies"]]
+script = ExtResource("1_ec8af")
+metadata/_custom_type_script = "uid://kxisevks3ykr"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1613988263]
 mesh = SubResource("SphereMesh_4kxuq")
