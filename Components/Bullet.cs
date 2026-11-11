@@ -14,6 +14,7 @@ public partial class Bullet : Area3D
 // Задаем значения переменным компонента DamagingComponent.
     public override void _Ready()
     {
+        // Находим дочерний компонент нанесения урона.
         foreach (var child in GetChildren())
         {
             if (child is DamagingComponent _damagingComponent)
@@ -27,11 +28,13 @@ public partial class Bullet : Area3D
         damagingComponent.shootedNode = parentNode;
     }
 
+    // Перемещает пулю вдоль локальной оси -Z.
     public override void _Process(double delta)
     {
         Position += -Transform.Basis.Z*BulletSpeed*(float)delta;
     }
 
+    // Задаёт урон компоненту попадания.
     public void GetDamage(float damage)
     {
         damagingComponent.damage = damage;

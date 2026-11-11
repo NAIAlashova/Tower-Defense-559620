@@ -10,7 +10,7 @@ public partial class HealthComponent : Node
     protected float MaxHealth {get; set; } = 100f;
     public float CurrentHealth { get; private set; }
     public event Action<float> HealthChanged;
-    
+
     public override void _Ready()
     {
         parentNode = GetParent<CharacterBody3D>();
@@ -24,6 +24,7 @@ public partial class HealthComponent : Node
         }
     }
 
+    // Обрабатывает получаемый урон.
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
@@ -34,6 +35,7 @@ public partial class HealthComponent : Node
         }
     }
 
+    // Обрабатывает смерть
     private void Die()
     {
         GD.Print($"{parentNode.Name} die");

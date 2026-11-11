@@ -29,23 +29,28 @@ public partial class Player : CharacterBody3D
     public override void _Ready()
     {
       parentNode = GetParent<Node3D>();
+      // Сигнал на изменение здоровья и выводим значение текущего здоровья.
       var health = GetNode<HealthComponent>("HealthComponent");
       health.HealthChanged += UpdateHealthLabel;
       UpdateHealthLabel(health.CurrentHealth);
     }
 
+    // Выводит здоровье игрока без отрицательных значений.
     private void UpdateHealthLabel(float health)
     {
         if (HealthLabel != null)
             HealthLabel.Text = $"Здоровье: {Mathf.Max(0f, health):0.#}";
     }
 
+    // Обновляет уведомление, движение и направление взгляда.
     public override void _PhysicsProcess(double delta)
     {
+        // Скрываем сообщение после окончания таймера.
         if (CanConstructionTimer.IsStopped())
         {
             CanConstructionLabel.Visible = false;
         }
+        // Обрабатываем перемещение игрока.
         Move((float)delta);
         MoveAndSlide();
         RotateTowardsMouse();
@@ -71,12 +76,14 @@ public partial class Player : CharacterBody3D
         if (!intersection.HasValue)
             return;
 
+        // Поворачиваемся к найденной точке, избегая нулевого направления.
         Vector3 target = intersection.Value;
         target.Y = GlobalPosition.Y;
         if (GlobalPosition.DistanceSquaredTo(target) > 0.0001f)
             LookAt(target, Vector3.Up);
     }
 
+    // Перемещает игрока по вводу с учётом замедления.
     private void Move(float delta)
     {
         if (isDo == 1)
@@ -108,6 +115,7 @@ public partial class Player : CharacterBody3D
         }
     }
 
+    // Обрабатывает действия с клавиатуры.
     public override void _Input(InputEvent @event)
     {
         if (@event.IsEcho())
@@ -115,9 +123,9 @@ public partial class Player : CharacterBody3D
 
         if (@event.IsActionPressed("pause"))
         {
-            // Одно переключение на одно нажатие F.
             isDo *= -1;
 
+            // Переключаем паузу движения и стрельбы объектов сцены.
             foreach (var sibling in parentNode.GetChildren())
             {
                 foreach (var component in sibling.GetChildren())
@@ -131,6 +139,7 @@ public partial class Player : CharacterBody3D
             InstanceMenu();
         }
 
+        // Обрабатываем выбор типа башни в режиме строительства.
         if (isDo == -1)
         {
             if (@event.IsActionPressed("tower_type1"))
@@ -142,8 +151,11 @@ public partial class Player : CharacterBody3D
         }
     }
 
+    // При первом вызове прозволяет выбрать башню, создавая макет.
+    // При повторном строит выбранную башню при наличии нужного количества ресурсов.
     private void InstanceMenu()
     {
+        // В режиме строительства показываем макет башни.
         if (isDo == -1)
         {
             /// Создаём меню
@@ -156,26 +168,32 @@ public partial class Player : CharacterBody3D
         }
         else
         {
+            // Проверяем ресурсы для выбранной башни.
             if (parentNode.GetNode<InventaryComponent>("InventaryComponent").CanBuildTower(towerType))
             {
+                // Создаём башню на месте макета.
                 PackedScene TowerScene = GD.Load<PackedScene>(typeTowerScene[towerType]);
                 CharacterBody3D TowerInstance = TowerScene.Instantiate<CharacterBody3D>();
                 TowerInstance.Position = testTowerInstance.GlobalPosition;
                 AddSibling(TowerInstance);
 
+                // Списываем стоимость постройки.
                 parentNode.GetNode<InventaryComponent>("InventaryComponent").DeleteResources(towerType);
             }
             else
             {
+                // Показываем временное сообщение о нехватке ресурсов.
                 CanConstructionLabel.Visible = true;
                 CanConstructionTimer.Start();
             }
 
+            // Скрываем подсказку и удаляем макет.
             ConstructionLabel.Visible = false;
             testTowerInstance.QueueFree();
         }
     }
 
+    // Включает замедление игрока на 20 секунд через таймер.
     public virtual void Slowdown()
     {
         if (!isSlowed)
@@ -189,16 +207,19 @@ public partial class Player : CharacterBody3D
         }
     }
 
+    // Возвращает скорость с учётом активного замедления.
+    // Пока таймер работает, уменьшаем скорость втрое.
     private Vector3 SlowVelocity(Vector3 _velocity)
     {
         if (timerSlow != null)
-            {
+            {                
                 if (!timerSlow.IsStopped())
                 {
                     _velocity = _velocity / 3;
                 }
                 else
                 {
+                    // После таймера разрешаем повторное замедление.
                     isSlowed = false;
                 }
             }

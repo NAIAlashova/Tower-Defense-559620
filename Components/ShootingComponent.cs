@@ -16,16 +16,19 @@ public partial class ShootingComponent : Node
     private float CooldownShotting = 1f;
     [Export]
     protected PackedScene BulletScene = GD.Load<PackedScene>("res://Scenes/bullet.tscn");
-    private float CooldownProgress = 0f;
+    protected float CooldownProgress = 0f;
     protected int isDo = 1;
 
+    // Сохраняет ссылку на стреляющий объект.
     public override void _Ready()
     {
       parentNode = GetParent<CharacterBody3D>();  
     }
 
+    // Обновляет цель, выполняет выстрел и отсчитывает перезарядку.
     public override void _Process(double delta)
     {
+        // Проверяем наличие цели и готовность к выстрелу.
         if (IsInstanceValid(Target))
         {
             if (CooldownProgress <= 0.0)
@@ -39,15 +42,19 @@ public partial class ShootingComponent : Node
         }
         else if (visibleComponent != null)
         {
+            // Запрашиваем цель у компонента обнаружения.
             Target = visibleComponent.GetTarget();
         }
+        // Уменьшаем время перезарядки. Самодельный таймер
         CooldownProgress -= (float) delta;
     }
 
+    // Создаёт пулю, задаёт урон и направляет её к цели.
     protected virtual void ShootBullet()
     {
         Bullet bulletInstance = BulletScene.Instantiate<Bullet>();
         bulletInstance.Position = parentNode.Position + new Vector3(0f, 1f, 0f);
+        // Задаём параметры пуле и создаём её
         bool isAlly = parentNode.IsInGroup("allies");
         if (isAlly)
         {
@@ -71,14 +78,16 @@ public partial class ShootingComponent : Node
         {
             bulletInstance.LookAt(Target.Position);
         }
-        GD.Print("Bullet");
+        GD.Print("New bullet");
     }
     
+    // Переключает разрешение стрельбы.
     public void Pause()
     {
         isDo = isDo * -1;
     }
 
+    // Возвращает сцену снаряда для определения типа башни.
     public PackedScene CheckOfType()
     {
         return BulletScene;

@@ -32,10 +32,12 @@ public partial class InventaryComponent : Node
         UpdateCurrencyLabel();
     }
 
+    // Определяет тип башни и начисляет награду за уничтожение.
     public virtual void AddResources(Node3D tower)
     {
         foreach (var component in tower.GetChildren())
         {
+            // Определяем башни и начисляем за них награды.
             if (component is ShootingComponent shooter)
             {
                 if (shooter.CheckOfType() == StandartBullet)
@@ -54,20 +56,25 @@ public partial class InventaryComponent : Node
                 break;
             }
         }
+        // Обновляем надпись ресурсов.
         UpdateCurrencyLabel();
     }
 
+    // Списывает стоимость выбранной башни и обновляет интерфейс.
     public virtual void DeleteResources(int type_tower)
     {
         currentResources = currentResources - TowersPrice[type_tower];
+        // Выводим оставшиеся ресурсы.
         UpdateCurrencyLabel();
     }
 
+    // Проверяет наличие ресурсов для выбранной башни.
     public bool CanBuildTower(int type_tower)
     {
         return currentResources >= TowersPrice[type_tower];
     }
 
+    // Выводит текущее количество ресурсов в интерфейс.
     private void UpdateCurrencyLabel()
     {
         currentCurrencyLabel.Text = $"Ресурсы: {currentResources}";

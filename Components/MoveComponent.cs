@@ -17,12 +17,15 @@ public partial class MoveComponent : Node
     private bool isSlowed {set; get;} = false;
     private bool isAntiSlowed = false;
 
+    // Сохраняет ссылку на перемещаемую башню.
     public override void _Ready()
     {
       parentNode = GetParent<CharacterBody3D>();  
     }
+
     public override void _PhysicsProcess(double delta)
     {
+        // После таймера восстанавливаем скорость и удаляем таймер.
         if (isSlowed && timerSlow != null)
         {
             if (timerSlow.IsStopped() & isAntiSlowed)
@@ -34,15 +37,18 @@ public partial class MoveComponent : Node
                 isAntiSlowed = false;
             }
         }
+        // Запрашиваем новую цель, если прежняя недействительна.
         if (!IsInstanceValid(Target))
         {
             Target = visibleComponent.GetTarget();
         }
         else
         {
+            // Двигаемся к действующей цели.
             _Move((float)delta);
         }
     }
+    // Перемещает башню с учётом паузы и радиуса остановки.
     private void _Move(float delta)
     {
         if (isDo == 1)
@@ -57,6 +63,7 @@ public partial class MoveComponent : Node
                     parentNode.MoveAndSlide();
                 }
             }
+            // Если цели нет, движемся к центру
             else
             {
                 Vector3 _velocity = new Vector3(0f, 0f, 0f) - Target.Position;
@@ -67,11 +74,13 @@ public partial class MoveComponent : Node
         }
     }
     
+    // Переключает разрешение движения для режима строительства.
     public void Pause()
     {
         isDo = isDo * -1;
     }
 
+    // Замедляет башню в четыре раза на 20 секунд.
     public virtual void Slowdown()
     {
         if (!isSlowed)
