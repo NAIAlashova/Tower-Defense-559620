@@ -59,8 +59,6 @@ metadata/_custom_type_script = "uid://csxdi8aulef8j"
 [node name="InventaryComponent" type="Node" parent="." unique_id=626716244 node_paths=PackedStringArray("currentCurrencyLabel")]
 script = ExtResource("5_uc7fm")
 currentCurrencyLabel = NodePath("../CanvasLayer/CurrencuLabel")
-StandartBullet = ExtResource("1_brycl")
-InitialResources = 50
 metadata/_custom_type_script = "uid://24pint26tctv"
 
 [node name="CanConstructionTimer" type="Timer" parent="." unique_id=112966663]
@@ -85,6 +83,7 @@ text = "Управление - WASD
 label_settings = SubResource("LabelSettings_sbiut")
 
 [node name="ConstructionLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1530955278]
+visible = false
 layout_mode = 2
 text = "1 - стандартная 
 стреляющая башня

@@ -10,7 +10,7 @@ public partial class InventaryComponent : Node
     [Export]
     protected Label currentCurrencyLabel;
     [Export]
-    private PackedScene StandartBullet;
+    private PackedScene StandartBullet = GD.Load<PackedScene>("res://Scenes/bullet.tscn");
     [Export]
     private int InitialResources = 100;
     
@@ -46,10 +46,12 @@ public partial class InventaryComponent : Node
                 {
                     currentResources = currentResources + TowersAward[1];
                 }
+                break;
             }
             if (component is ExplosiveComponent)
             {
                 currentResources = currentResources + TowersAward[2];
+                break;
             }
         }
         UpdateCurrencyLabel();
