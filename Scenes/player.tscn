@@ -43,6 +43,7 @@ mesh = SubResource("CapsuleMesh_4kxuq")
 
 [node name="PlayersShootingComponent" type="Node" parent="." unique_id=649499032]
 script = ExtResource("3_6t5aa")
+ShootingCooldown = 0.5
 metadata/_custom_type_script = "uid://w836pm5rv37l"
 
 [node name="Node3D2" type="Node3D" parent="." unique_id=924957535]

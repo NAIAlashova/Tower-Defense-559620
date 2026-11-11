@@ -153,9 +153,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2096899, 0, -8.13081)
 [node name="EnemieTower" parent="." unique_id=110278794 instance=ExtResource("1_brycl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67836, 0, -3.2459269)
 
-[node name="EnemieTower2" parent="." unique_id=1728614070 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76623535, 0, 8.875663)
-
 [node name="EnemieTower3" parent="." unique_id=1990289897 instance=ExtResource("1_brycl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3220067, 0, -8.210842)
 

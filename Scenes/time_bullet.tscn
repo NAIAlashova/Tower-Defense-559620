@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcr03rjgunejc" path="res://Components/Bullet.cs" id="1_4w76x"]
 [ext_resource type="Script" uid="uid://c83uqv0missjr" path="res://Components/SlowingComponent.cs" id="2_kjibk"]
+[ext_resource type="Script" uid="uid://ihx7jhc1dop3" path="res://Components/ComponentForTemporaryBody.cs" id="3_kjibk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
 radius = 0.119628906
@@ -36,4 +37,14 @@ metadata/_custom_type_script = "uid://c83uqv0missjr"
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_4kxuq")
 
+[node name="ComponentForTemporaryBody" type="Node" parent="." unique_id=1834818603 node_paths=PackedStringArray("TimerOfLife")]
+script = ExtResource("3_kjibk")
+TimerOfLife = NodePath("Timer")
+metadata/_custom_type_script = "uid://ihx7jhc1dop3"
+
+[node name="Timer" type="Timer" parent="ComponentForTemporaryBody" unique_id=979600649]
+wait_time = 20.0
+one_shot = true
+
 [connection signal="body_entered" from="SlowingComponent" to="SlowingComponent" method="_on_body_entered"]
+[connection signal="timeout" from="ComponentForTemporaryBody/Timer" to="ComponentForTemporaryBody" method="_on_timer_timeout"]

@@ -11,6 +11,7 @@
 lab3-559620/
 ├── Components/
 │   ├── Bullet.cs
+│   ├── ComponentForTemporaryBody.cs
 │   ├── Core.cs
 │   ├── DamagingComponent.cs
 │   ├── ExplosiveComponent.cs
@@ -154,6 +155,15 @@ lab3-559620/
 хватает, показывает сообщение. Метод `Slowdown()` включает замедление:
 скорость движения уменьшается в три раза на 20 секунд.
 
+### `ComponentForTemporaryBody`
+
+Наследуется от `Node`. Ограничивает время существования родительского
+объекта. При запуске в `_Ready()` получает родительский `Node3D` и
+запускает таймер `TimerOfLife`. По сигналу `timeout` вызывает метод
+`_on_timer_timeout()`, который выводит сообщение и удаляет родительский
+узел через `QueueFree()`. Используется для удаления пуль и обломков
+по истечении времени, заданного в таймере сцены.
+
 ### `Core`
 
 Наследуется от `CharacterBody3D`. Обозначает ядро базы и используется в `TrackerComponent` для проверки типа
@@ -195,6 +205,9 @@ lab3-559620/
     Также является связующим звеном между `HealthComponent` игрока и `HealthLabel`.
 12. `Core` обозначает ядро базы. 
     Его здоровье хранится в дочернем `HealthComponent`.
+13. `ComponentForTemporaryBody` управляет временем жизни пуль и обломков.
+    Необходим для удаления объектов, которые уже существую достаточно долго, чтобы
+    уже не влиять на сцену.
 
 Компоненты подключены к дочерним узлам через сцены Godot:
 
@@ -213,12 +226,11 @@ lab3-559620/
     Скрипт `Player` подключён к корневому узлу сцены.
 -   `Scenes/Core.tscn` --- `HealthComponent`. Скрипт `Core` подключён
     к корневому узлу сцены.
--   `Scenes/bullet.tscn` --- `DamagingComponent`. Скрипт `Bullet` подключён
-    к корневому узлу сцены.
--   `Scenes/time_bullet.tscn` --- `SlowingComponent`. Скрипт `Bullet`
-    подключён к корневому узлу сцены.
+-   `Scenes/bullet.tscn` --- `DamagingComponent` и `ComponentForTemporaryBody`
+    Скрипт `Bullet` подключён к корневому узлу сцены.
+-   `Scenes/time_bullet.tscn` --- `SlowingComponent` и `ComponentForTemporaryBody`
+    Скрипт `Bullet` подключён к корневому узлу сцены.
 -   `Scenes/testTower.tscn` --- дочерних игровых компонентов со скриптами
     нет.
--   `Scenes/DebrisScene.tscn` --- дочерних игровых компонентов со скриптами
-    нет; содержит `MeshInstance3D` и `Area3D` с дочерним `CollisionShape3D`.
+-   `Scenes/DebrisScene.tscn` --- `ComponentForTemporaryBody`.
 
