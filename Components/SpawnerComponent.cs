@@ -11,12 +11,12 @@ public partial class SpawnerComponent : Node
     ];
     private Timer spawnTimer;
     [Export]
-    private int SpawnTime = 8;
+    private int SpawnTime = 4;
     private PackedScene TowerScene;
     private Node3D parentNode;
     private int isDo = 1;
     
-
+    // Создаёт таймер для спавна
     public override void _Ready()
     {
         parentNode = GetParent<Core>();
@@ -24,11 +24,12 @@ public partial class SpawnerComponent : Node
         spawnTimer.WaitTime = SpawnTime;
         spawnTimer.OneShot = true;
         AddChild(spawnTimer);
-        spawnTimer.Start();
     }
 
     public override void _Process(double delta)
     {
+        // Если таймер остановлен и запущен игровой режим(а не строительство),
+        // то создаёт башнб врага одного из 3 представленных вариантов.
         if (spawnTimer.IsStopped() & isDo == 1)
         {
             var random = new RandomNumberGenerator();
@@ -42,6 +43,7 @@ public partial class SpawnerComponent : Node
         }
     }
 
+    // Вызывается из Player в случае запуска/окончания режима строительства.
     public void Pause()
     {
         isDo = isDo * -1;
