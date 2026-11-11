@@ -24,12 +24,14 @@ lab3-559620/
 │   ├── PlayersShootingComponent.cs
 │   ├── ShootingComponent.cs
 │   ├── SlowingComponent.cs
+│   ├── SpawnerComponent.cs
 │   ├── TrackerComponent.cs
 │   └── VisibleComponent.cs
 ├── Scenes/
 │   ├── BaseScene.tscn
 │   ├── Core.tscn
 │   ├── DebrisScene.tscn
+│   ├── EnemyCore.tscn
 │   ├── SimbolOfSlow.tscn
 │   ├── bullet.tscn
 │   ├── enemie_tower(t1).tscn
@@ -50,6 +52,7 @@ lab3-559620/
     взрывы, учёт ресурсов и обработка уничтожения объектов.
 -   `Scenes/BaseScene.tscn` --- основная сцена уровня.
 -   `Scenes/player.tscn` и `Scenes/Core.tscn` --- сцены игрока и ядра базы.
+-   `Scenes/EnemyCore.tscn` --- вражеское ядро с компонентом создания башен.
 -   `Scenes/tower(t1).tscn`, `Scenes/tower(t2).tscn`, `Scenes/tower(t3).tscn`
     --- союзные башни: обычная, замедляющая и взрывная соответственно.
 -   `Scenes/enemie_tower(t1).tscn`, `Scenes/enemy_tower(t2).tscn`,
@@ -170,6 +173,14 @@ lab3-559620/
 узел через `QueueFree()`. Используется для удаления пуль и обломков
 по истечении времени, заданного в таймере сцены.
 
+### `SpawnerComponent`
+
+Отвечает за периодическое создание вражеских башен рядом с ядром. 
+В `_Process()` проверяет, завершился ли таймер и разрешено ли создание башен. Случайно выбирает
+одну из трёх сцен вражеских башен, создаёт её рядом с ядром, добавляет
+через `AddSibling()` и снова запускает таймер. Метод `Pause()` переключает
+разрешение создания башен, не останавливая сам таймер.
+
 ### `Core`
 
 Наследуется от `CharacterBody3D`. Обозначает ядро базы и используется в `TrackerComponent` для проверки типа
@@ -216,6 +227,7 @@ lab3-559620/
 13. `ComponentForTemporaryBody` управляет временем жизни пуль и обломков.
     Необходим для удаления объектов, которые уже существую достаточно долго, чтобы
     уже не влиять на сцену.
+14. `SpawnerComponent` Необходим для появления башен врагов, а также завершения игры с победой.
 
 Компоненты подключены к дочерним узлам через сцены Godot:
 
@@ -234,6 +246,8 @@ lab3-559620/
     Скрипт `Player` подключён к корневому узлу сцены.
 -   `Scenes/Core.tscn` --- `HealthComponent`. Скрипт `Core` подключён
     к корневому узлу сцены.
+-   `Scenes/EnemyCore.tscn` --- `HealthComponent` и `SpawnerComponent`.
+    Скрипт `Core` подключён к корневому узлу сцены. 
 -   `Scenes/bullet.tscn` --- `DamagingComponent` и `ComponentForTemporaryBody`
     Скрипт `Bullet` подключён к корневому узлу сцены.
 -   `Scenes/time_bullet.tscn` --- `SlowingComponent` и `ComponentForTemporaryBody`

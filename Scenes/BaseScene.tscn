@@ -1,14 +1,11 @@
 [gd_scene format=3 uid="uid://b400x2iroaaji"]
 
-[ext_resource type="PackedScene" uid="uid://qpmptsgm47en" path="res://Scenes/enemie_tower(t1).tscn" id="1_brycl"]
-[ext_resource type="PackedScene" uid="uid://dwlql5jihgull" path="res://Scenes/enemy_tower(t3).tscn" id="1_uc7fm"]
 [ext_resource type="PackedScene" uid="uid://cty4p7vaoqhkf" path="res://Scenes/player.tscn" id="3_58y5n"]
 [ext_resource type="Script" uid="uid://csxdi8aulef8j" path="res://Components/TrackerComponent.cs" id="4_4ksr6"]
 [ext_resource type="PackedScene" uid="uid://bsmqqus8xjf06" path="res://Scenes/testTower.tscn" id="4_orcbb"]
 [ext_resource type="Script" uid="uid://24pint26tctv" path="res://Components/InventaryComponent.cs" id="5_uc7fm"]
-[ext_resource type="PackedScene" uid="uid://bopmbls88riy8" path="res://Scenes/enemy_tower(t2).tscn" id="7_56e3h"]
+[ext_resource type="PackedScene" uid="uid://b3ah670j4dey0" path="res://Scenes/EnemyCore.tscn" id="6_orcbb"]
 [ext_resource type="PackedScene" uid="uid://dit837ntpsc88" path="res://Scenes/Core.tscn" id="8_eumj5"]
-[ext_resource type="PackedScene" uid="uid://bqhwgyhuhlrf6" path="res://Scenes/tower(t2).tscn" id="9_sbiut"]
 
 [sub_resource type="Environment" id="Environment_4kxuq"]
 
@@ -147,20 +144,5 @@ CanConstructionTimer = NodePath("../CanConstructionTimer")
 [node name="Core" parent="." unique_id=793690817 instance=ExtResource("8_eumj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 0.039)
 
-[node name="CharacterBody3D" parent="." unique_id=1805737031 instance=ExtResource("1_uc7fm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2096899, 0, -8.13081)
-
-[node name="EnemieTower" parent="." unique_id=110278794 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67836, 0, -3.2459269)
-
-[node name="EnemieTower3" parent="." unique_id=1990289897 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3220067, 0, -8.210842)
-
-[node name="EnemieTower4" parent="." unique_id=1355318387 instance=ExtResource("1_brycl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3337994, 0, 9.212641)
-
-[node name="EnemieTimeTower" parent="." unique_id=1891862802 instance=ExtResource("7_56e3h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32714, 0.09516621, 3.7360497)
-
-[node name="TimeTower" parent="." unique_id=1042286828 instance=ExtResource("9_sbiut")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+[node name="Core2" parent="." unique_id=1352535867 instance=ExtResource("6_orcbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.674555, 0.773319, 0)
