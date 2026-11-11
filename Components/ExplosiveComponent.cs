@@ -4,13 +4,19 @@ using System;
 [GlobalClass]
 public partial class ExplosiveComponent : DamagingComponent
 {
+    [Export(PropertyHint.Range, "0,1000,1,or_greater")]
+    private float ExplosionDamage = 70f;
+    [Export(PropertyHint.Range, "0.01,100,0.01,or_greater")]
+    private float ExplosionRadius = 2f;
+    [Export(PropertyHint.Range, "0,100,1,or_greater")]
+    private int DebrisCount = 20;
     private PackedScene DebrisScene = GD.Load<PackedScene>("res://Scenes/DebrisScene.tscn");
     
     // Сохраняет взрывную башню и задаёт урон.
     public override void _Ready()
     {
         bulletParentNode = GetParent<CharacterBody3D>();
-        damage = 70f;
+        damage = ExplosionDamage;
         GD.Print("Bomb is in the Scene");
     }
 
@@ -32,7 +38,7 @@ public partial class ExplosiveComponent : DamagingComponent
         // Эффект взрыва.
         var random = new RandomNumberGenerator();
         random.Randomize();
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < DebrisCount; i++)
         {
             // Создаём обломок в точке взрыва.
             var debris = DebrisScene.Instantiate<RigidBody3D>();
@@ -73,7 +79,7 @@ public partial class ExplosiveComponent : DamagingComponent
             return;
         }
         var sphere = (SphereShape3D)damageShape.Shape.Duplicate();
-        sphere.Radius = 2f;
+        sphere.Radius = ExplosionRadius;
         damageShape.SetDeferred(CollisionShape3D.PropertyName.Shape, sphere);
 
         foreach (var target in GetOverlappingBodies())

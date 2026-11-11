@@ -18,12 +18,14 @@ public partial class InventaryComponent : Node
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingСomponent
     /// 2 - Башня с ExplosiveСomponent
+    [Export]
     private int[] TowersPrice = [100, 120, 220];
 
     /// Приз за уничтожение башен
     /// 0 - Базовая башня с DamagingComponent
     /// 1 - Башня с SlowingComponent
     /// 2 - Башня с ExplosiveСomponent
+    [Export]
     private int[] TowersAward = [110, 120, 200];
 
     public override void _Ready()

@@ -14,6 +14,8 @@ public partial class MoveComponent : Node
     private VisibleComponent visibleComponent;
     private int isDo {set; get;} = 1;
     private Timer timerSlow;
+    [Export(PropertyHint.Range, "0.1,120,0.1,or_greater")]
+    private double SlowDuration = 20.0;
     private bool isSlowed {set; get;} = false;
     private bool isAntiSlowed = false;
     [Export]
@@ -91,7 +93,7 @@ public partial class MoveComponent : Node
             isSlowed = true;
             Speed = Speed / 4;
             timerSlow = new Timer();
-            timerSlow.WaitTime = 20;
+            timerSlow.WaitTime = SlowDuration;
             timerSlow.OneShot = true;
             AddChild(timerSlow);
             timerSlow.Start();

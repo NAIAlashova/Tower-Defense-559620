@@ -9,6 +9,8 @@ public partial class Player : CharacterBody3D
     private Node3D parentNode;
     private int isDo = 1;
     private Timer timerSlow;
+    [Export(PropertyHint.Range, "0.1,120,0.1,or_greater")]
+    private double SlowDuration = 20.0;
     private bool isSlowed {set; get;} = false;
     [Export]
     protected PackedScene TestTowerScene;
@@ -204,7 +206,7 @@ public partial class Player : CharacterBody3D
         {
             isSlowed = true;
             timerSlow = new Timer();
-            timerSlow.WaitTime = 20;
+            timerSlow.WaitTime = SlowDuration;
             timerSlow.OneShot = true;
             AddChild(timerSlow);
             timerSlow.Start();
