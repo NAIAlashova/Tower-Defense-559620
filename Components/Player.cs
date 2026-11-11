@@ -25,6 +25,8 @@ public partial class Player : CharacterBody3D
     private string[] typeTowerScene = ["res://Scenes/tower(t1).tscn", 
     "res://Scenes/tower(t2).tscn", 
     "res://Scenes/tower(t3).tscn"];
+    [Export]
+    private PackedScene Simbol;
 
     public override void _Ready()
     {
@@ -204,6 +206,10 @@ public partial class Player : CharacterBody3D
             timerSlow.OneShot = true;
             AddChild(timerSlow);
             timerSlow.Start();
+            /// Создаёт символ, над замедленным объектом для подтверждения наложения эффекта.
+            Area3D simbolInstace = Simbol.Instantiate<Area3D>();
+            simbolInstace.Position = new Vector3(0f, 1.7f, 0f);
+            AddChild(simbolInstace);
         }
     }
 

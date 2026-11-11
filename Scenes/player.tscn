@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmtct1iear28n" path="res://Components/Player.cs" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://cppbvj0ufn8qj" path="res://Scenes/SimbolOfSlow.tscn" id="2_vgqql"]
 [ext_resource type="Script" uid="uid://w836pm5rv37l" path="res://Components/PlayersShootingComponent.cs" id="3_6t5aa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
@@ -23,6 +24,7 @@ height = 0.4
 
 [node name="Player" type="CharacterBody3D" unique_id=2068096347 groups=["allies"]]
 script = ExtResource("1_v0iea")
+Simbol = ExtResource("2_vgqql")
 metadata/_custom_type_script = "uid://bmtct1iear28n"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22824250]

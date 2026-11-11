@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c54a2msuvg4ac" path="res://Components/MoveComponent.cs" id="1_v3oxo"]
 [ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_fv6kx"]
+[ext_resource type="PackedScene" uid="uid://cppbvj0ufn8qj" path="res://Scenes/SimbolOfSlow.tscn" id="2_os4fb"]
 [ext_resource type="Script" uid="uid://bepbllqttmf85" path="res://Components/VisibleComponent.cs" id="3_os4fb"]
 [ext_resource type="Script" uid="uid://cqrefvsfgnkbp" path="res://Components/ShootingComponent.cs" id="4_q3wng"]
 [ext_resource type="PackedScene" uid="uid://bm7qlcvox1xj4" path="res://Scenes/time_bullet.tscn" id="5_qo4jk"]
@@ -29,6 +30,7 @@ shape = SubResource("CylinderShape3D_xlgcr")
 [node name="MoveComponent" type="Node" parent="." unique_id=383564012 node_paths=PackedStringArray("visibleComponent")]
 script = ExtResource("1_v3oxo")
 visibleComponent = NodePath("../VisibleComponent")
+Simbol = ExtResource("2_os4fb")
 metadata/_custom_type_script = "uid://c54a2msuvg4ac"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1676715693]

@@ -16,6 +16,9 @@ public partial class MoveComponent : Node
     private Timer timerSlow;
     private bool isSlowed {set; get;} = false;
     private bool isAntiSlowed = false;
+    [Export]
+    private PackedScene Simbol;
+
 
     // Сохраняет ссылку на перемещаемую башню.
     public override void _Ready()
@@ -93,6 +96,11 @@ public partial class MoveComponent : Node
             AddChild(timerSlow);
             timerSlow.Start();
             isAntiSlowed = true;
+
+            /// Создаёт символ, над замедленным объектом для подтверждения наложения эффекта.
+            Area3D simbolInstace = Simbol.Instantiate<Area3D>();
+            simbolInstace.Position = new Vector3(0f, 2.7f, 0f);
+            parentNode.AddChild(simbolInstace);
         }
     }
 }

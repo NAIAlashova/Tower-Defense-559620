@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c54a2msuvg4ac" path="res://Components/MoveComponent.cs" id="1_qjq6r"]
 [ext_resource type="Script" uid="uid://c0gluegirdvt8" path="res://Components/HealthComponent.cs" id="2_f2bch"]
+[ext_resource type="PackedScene" uid="uid://cppbvj0ufn8qj" path="res://Scenes/SimbolOfSlow.tscn" id="2_xujb0"]
 [ext_resource type="Script" uid="uid://dty27dot5d7gg" path="res://Components/ExplosiveComponent.cs" id="3_xujb0"]
 [ext_resource type="Script" uid="uid://bepbllqttmf85" path="res://Components/VisibleComponent.cs" id="4_jta0u"]
 
@@ -35,6 +36,7 @@ script = ExtResource("1_qjq6r")
 Speed = 5.0
 StopRadius = 0.0
 visibleComponent = NodePath("../VisibleComponent")
+Simbol = ExtResource("2_xujb0")
 metadata/_custom_type_script = "uid://c54a2msuvg4ac"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1973516348]

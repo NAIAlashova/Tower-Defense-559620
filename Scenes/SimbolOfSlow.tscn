@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cppbvj0ufn8qj"]
+
+[ext_resource type="Script" uid="uid://ihx7jhc1dop3" path="res://Components/ComponentForTemporaryBody.cs" id="1_nfufc"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_mti6b"]
+albedo_color = Color(0.5194395, 0.7076754, 0.92228484, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4kxuq"]
+material = SubResource("ORMMaterial3D_mti6b")
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="Area3D" type="Area3D" unique_id=929012854]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=251498918]
+transform = Transform3D(0.70710677, 0.49999994, 0.49999994, 0, 0.7071067, -0.7071067, -0.70710677, 0.49999994, 0.49999994, 0, 0, 0)
+mesh = SubResource("BoxMesh_4kxuq")
+
+[node name="ComponentForTemporaryBody" type="Node" parent="." unique_id=1772275187 node_paths=PackedStringArray("TimerOfLife")]
+script = ExtResource("1_nfufc")
+TimerOfLife = NodePath("Timer")
+metadata/_custom_type_script = "uid://ihx7jhc1dop3"
+
+[node name="Timer" type="Timer" parent="ComponentForTemporaryBody" unique_id=1782454949]
+wait_time = 20.0
+one_shot = true

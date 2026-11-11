@@ -25,7 +25,5 @@ public partial class SlowingComponent : DamagingComponent
                     }
                 }
         }
-        /// Вместо изменения цвета создавай звездочку над замедленнысм объектом.
-        /// enemy.AddChild();
     }
 }

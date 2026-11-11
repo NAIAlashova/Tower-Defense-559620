@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcr03rjgunejc" path="res://Components/Bullet.cs" id="1_4w76x"]
 [ext_resource type="Script" uid="uid://c83uqv0missjr" path="res://Components/SlowingComponent.cs" id="2_kjibk"]
 [ext_resource type="Script" uid="uid://ihx7jhc1dop3" path="res://Components/ComponentForTemporaryBody.cs" id="3_kjibk"]
+[ext_resource type="PackedScene" uid="uid://cppbvj0ufn8qj" path="res://Scenes/SimbolOfSlow.tscn" id="3_r1lbo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
 radius = 0.119628906
@@ -31,6 +32,7 @@ mesh = SubResource("CapsuleMesh_4kxuq")
 
 [node name="SlowingComponent" type="Area3D" parent="." unique_id=894688497]
 script = ExtResource("2_kjibk")
+Simbol = ExtResource("3_r1lbo")
 metadata/_custom_type_script = "uid://c83uqv0missjr"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SlowingComponent" unique_id=983349035]
