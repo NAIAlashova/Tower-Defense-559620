@@ -10,6 +10,15 @@ public partial class ExplosiveComponent : DamagingComponent
     {
         bulletParentNode = GetParent<CharacterBody3D>();
         damage = 70f;
+        GD.Print("Bomb is in the Scene");
+    }
+
+    public override void _on_body_entered(Node3D body)
+    {
+        if (body.IsInGroup(damagingGroup))
+        {
+            Hit(body);
+        }
     }
 
     protected override void Damage(Node3D enemy)
@@ -43,6 +52,5 @@ public partial class ExplosiveComponent : DamagingComponent
                 random.RandfRange(-2f, 2f),
                 random.RandfRange(-2f, 2f)));
         }
-        QueueFree();
     }
 }

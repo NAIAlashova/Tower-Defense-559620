@@ -16,7 +16,7 @@ public partial class DamagingComponent : Area3D
         bulletParentNode = GetParent<Area3D>();
     }
 
-    public void _on_body_entered(Node3D body)
+    public virtual void _on_body_entered(Node3D body)
     {
         if (body.IsInGroup(damagingGroup))
         {
@@ -28,9 +28,9 @@ public partial class DamagingComponent : Area3D
         }
     }
 
-    private void Hit(Node3D body)
+    protected virtual void Hit(Node3D body)
     {
-        GD.Print("in enemie");
+        GD.Print($"{bulletParentNode.Name} in enemie");
         Damage(body);
         bulletParentNode.QueueFree();
     }
