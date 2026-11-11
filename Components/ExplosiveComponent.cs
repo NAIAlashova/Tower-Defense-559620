@@ -54,4 +54,38 @@ public partial class ExplosiveComponent : DamagingComponent
         }
         bulletParentNode.QueueFree();
     }
+
+    protected override void Damage(Node3D enemy)
+    {
+        // Увеличиваем радиус воздействия взрыва
+        CollisionShape3D damageShape = null;
+        foreach (var child in GetChildren())
+        {
+            if (child is CollisionShape3D collision && collision.Shape is SphereShape3D)
+            {
+                damageShape = collision;
+                break;
+            }
+        }
+        if (damageShape == null)
+        {
+            GD.PushError("ExplosiveComponent: не найдена дочерняя сферическая форма коллизии.");
+            return;
+        }
+        var sphere = (SphereShape3D)damageShape.Shape.Duplicate();
+        sphere.Radius = 2f;
+        damageShape.SetDeferred(CollisionShape3D.PropertyName.Shape, sphere);
+
+        foreach (var target in GetOverlappingBodies())
+        {
+            foreach (var child in target.GetChildren())
+                {
+                    if (child is HealthComponent healthComponent)
+                    {
+                        healthComponent.TakeDamage(damage);
+                        break;
+                    }
+                }
+        }
+    }
 }

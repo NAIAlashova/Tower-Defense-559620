@@ -49,7 +49,7 @@ script = ExtResource("3_xujb0")
 damagingGroup = "allies"
 metadata/_custom_type_script = "uid://dty27dot5d7gg"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosiveComponent" unique_id=884091525]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ExplosiveComponent" unique_id=884091525]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("SphereShape3D_4kxuq")
 

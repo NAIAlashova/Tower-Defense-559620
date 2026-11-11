@@ -136,6 +136,8 @@ public partial class Player : CharacterBody3D
                         moveComponent.Pause();
                     else if (component is ShootingComponent shootingComponent)
                         shootingComponent.Pause();
+                    else if (component is SpawnerComponent spawnerComponent)
+                        spawnerComponent.Pause();
                 }
             }
             InstanceMenu();

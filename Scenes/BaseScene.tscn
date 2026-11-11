@@ -70,7 +70,7 @@ one_shot = true
 
 [node name="Подсказки" type="VBoxContainer" parent="CanvasLayer" unique_id=1689601488]
 offset_left = 5.0
-offset_top = 45.0
+offset_top = 30.0
 offset_right = 285.0
 offset_bottom = 265.0
 mouse_filter = 2
@@ -79,7 +79,7 @@ theme_override_constants/separation = 4
 [node name="HelpLabel" type="Label" parent="CanvasLayer/Подсказки" unique_id=488291498]
 layout_mode = 2
 text = "Управление - WASD
-Стрельба - E
+Стрельба - E, ЛКМ, Space
 Постройка башни - F
 "
 label_settings = SubResource("LabelSettings_sbiut")
